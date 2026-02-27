@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - John I. Haas</title>
+  <link rel="stylesheet" href="Web2Lead.css">
+</head>
+<body>
+
+  <div class="form-wrapper">
+    <h1>Interested?</h1>
+    <p class="form-intro">If you'd like to order some hops, learn more about any of our innovative hops products, or just need help figuring out where to start, please fill out the following form and we'll get back to you soon.</p>
+
+    <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D9M00000Ki5V8" method="POST">
+
+      <input type="hidden" name="oid" value="00D9M00000Ki5V8">
+      <input type="hidden" name="retURL" value="https://www.shop.johnihaas.com/">
+
+      <!--  Debug fields (uncomment to test)
+      <input type="hidden" name="debug" value="1">
+      <input type="hidden" name="debugEmail" value="barthhaasx@salesfive.com">
+      -->
+
+      <ul class="form_fields">
+
+        <li>
+          <label for="first_name">First Name</label>
+          <input id="first_name" maxlength="40" name="first_name" type="text" placeholder="First Name">
+        </li>
+
+        <li>
+          <label for="last_name">Last Name</label>
+          <input id="last_name" maxlength="80" name="last_name" type="text" placeholder="Last Name">
+        </li>
+
+        <li class="full-width">
+          <label for="email">Email</label>
+          <input id="email" maxlength="80" name="email" type="email" placeholder="Email">
+        </li>
+
+        <li>
+          <label for="company">Company</label>
+          <input id="company" maxlength="40" name="company" type="text" placeholder="Company">
+        </li>
+
+
+        <li>
+          <label for="00N2p000009T9yk">Customer tier</label>
+          <div class="select-wrapper">
+            <select id="00N2p000009T9yk" name="00N2p000009T9yk" title="Customer tier">
+              <option value="">Less than 1,000 Barrels</option>
+              <option value="TIER 1">1,000 - 5,000 Barrels</option>
+              <option value="TIER 2">5,000 - 30,000 Barrels</option>
+              <option value="TIER 3">30,000 - 100,000 Barrels</option>
+              <option value="TIER 4">More than 100,000 Barrels</option>
+            </select>
+          </div>
+        </li>
+
+        <li>
+          <label for="phone">Phone</label>
+          <input id="phone" maxlength="40" name="phone" type="tel" placeholder="Phone">
+        </li>
+
+        <li>
+          <label for="country_code">Country</label>
+          <div class="select-wrapper">
+            <select id="country_code" name="country_code">
+              <option value="">Country</option>
+<option value="AE">United Arab Emirates</option>
+<option value="GB">United Kingdom</option>
+<option value="US">United States</option>
+<option value="MX">Mexico</option>
+<option value="CA">Canada</option>
+<option value="AU">Australia</option>
+<option value="DE">Germany</option>
+<option value="GB">United Kingdom</option>
+            </select>
+          </div>
+        </li>
+
+        <li>
+          <label for="00N2p0000096ZVY">Position</label>
+          <div class="select-wrapper">
+            <select id="00N2p0000096ZVY" name="00N2p0000096ZVY" title="Position">
+              <option value="">Position</option>
+              <option value="Brewing">Brewer / Head Brewer / Brewmaster</option>
+              <option value="Purchasing">Purchasing / Supply Chain</option>
+              <option value="Owner">Owner / Founder</option>
+              <option value="Direct">Direct</option>
+              <option value="Other">Other</option>
+              <option value="Product Development">Product development</option>
+              <option value="Quality Assurance">Quality assurance</option>
+            </select>
+          </div>
+        </li>
+
+        <li>
+          <label for="industry">Industry</label>
+          <div class="select-wrapper">
+            <select id="industry" name="industry">
+              <option value="">Industry</option>
+              <option value="Brewery">Brewery</option>
+              <option value="Flavor House">Flavor House</option>
+              <option value="Food">Food</option>
+              <option value="Beverage">Beverage</option>
+              <option value="Pharma & Health">Pharma &amp; Health</option>
+              <option value="Scent & Care">Scent &amp; Care</option>
+              <option value="Press">Press</option>
+              <option value="Homebrewer">Homebrewer</option>
+            </select>
+          </div>
+        </li>
+
+
+
+        <li class="full-width">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" placeholder="Message"></textarea>
+        </li>
+
+        <li class="full-width checkbox-field">
+          <div class="checkbox-option">
+            <input type="checkbox" id="00N2p0000095tEp" name="00N2p0000095tEp" value="1" required>
+            <label for="00N2p0000095tEp" class="checkbox-label">I hereby agree to the <a href="/dataprotection.html" target="_blank">data protection regulations</a> *</label>
+          </div>
+        </li>
+
+        <li class="full-width checkbox-field">
+          <div class="checkbox-option">
+            <input type="checkbox" id="00N2p000009TGWc" name="00N2p000009TGWc" value="1">
+            <label for="00N2p000009TGWc" class="checkbox-label">Yes, I want to continue to receive valuable information from John I. Haas and agree that they may inform me by newsletter. I can revoke this consent at any time.</label>
+          </div>
+        </li>
+
+      </ul>
+
+      <div class="form-submit">
+        <input type="submit" name="submit" value="Let's Takk Hops">
+      </div>
+
+    </form>
+  </div>
+
+</body>
+</html>

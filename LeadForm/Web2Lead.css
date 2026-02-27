@@ -1,0 +1,279 @@
+/* ADOBE FONT */
+@import url("https://use.typekit.net/xni4tvq.css");
+
+/* RESET */
+html, body, div, span, applet, object, iframe, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, em, img,
+ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ul, ol, li, fieldset, form, label,
+legend, table, caption, tbody, tfoot, thead, tr, th, td, article,
+aside, canvas, details, embed, figure, figcaption, footer, header,
+hgroup, menu, nav, output, ruby, section, summary, time, mark,
+audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header,
+hgroup, menu, nav, section {
+  display: block;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1;
+  background-color: #fdf6ef;
+  font-family: alternate-gothic-condensed-a, sans-serif;
+  color: #323E48;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+/* ---- FORM CONTAINER ---- */
+.form-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.form-wrapper h1 {
+  font-family: gelica, sans-serif;
+  font-size: 42px;
+  line-height: 1.1;
+  color: #323E48;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.form-wrapper .form-intro {
+  font-family: alternate-gothic-condensed-a, sans-serif;
+  font-size: 18px;
+  line-height: 1.4;
+  color: #323E48;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* ---- FORM FIELDS LAYOUT ---- */
+.form_fields {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -10px;
+  margin-left: -10px;
+  padding: 0;
+}
+
+.form_fields li {
+  list-style: none;
+  margin: 0;
+  flex: 1 1 100%;
+  padding-left: 10px;
+  padding-top: 10px;
+  border: 0;
+}
+
+@media (min-width: 420px) {
+  .form_fields li {
+    flex-basis: 50%;
+  }
+
+  .form_fields li.full-width {
+    flex-basis: 100%;
+  }
+}
+
+.form_fields li.full-width {
+  flex-basis: 100%;
+}
+
+/* ---- LABELS ---- */
+.form_fields label {
+  display: none;
+}
+
+/* ---- TEXT INPUTS ---- */
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  font-family: alternate-gothic-condensed-a, sans-serif;
+  font-size: 16px;
+  color: #323E48;
+  border: 0;
+  padding: 7px 15px;
+  margin: 0;
+  width: 100%;
+  height: 45px;
+  border-radius: 6px;
+  background-color: #fff;
+  box-sizing: border-box;
+  transition: background-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus {
+  outline: none;
+  background-color: #fff;
+  box-shadow: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #323E48;
+  opacity: 1;
+}
+
+/* ---- SELECT DROPDOWNS ---- */
+.select-wrapper {
+  background: #fff;
+  position: relative;
+  border-radius: 6px;
+}
+
+.select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  margin-top: -2px;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 5px 0 5px;
+  border-color: #323e48 transparent transparent transparent;
+}
+
+select {
+  font-family: alternate-gothic-condensed-a, sans-serif;
+  font-size: 16px;
+  color: #323E48;
+  border: 0;
+  background: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0 15px;
+  height: 45px;
+  width: 100%;
+  max-width: none;
+  display: block;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* ---- TEXTAREA ---- */
+textarea {
+  font-family: alternate-gothic-condensed-a, sans-serif;
+  font-size: 16px;
+  color: #323E48;
+  border: 0;
+  padding: 7px 15px;
+  margin: 0;
+  width: 100%;
+  min-height: 150px;
+  border-radius: 6px;
+  background-color: #fff;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* ---- CHECKBOXES ---- */
+.checkbox-field {
+  flex-basis: 100%;
+}
+
+.checkbox-option {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+input[type="checkbox"] {
+  height: auto;
+  width: auto;
+  margin-top: 3px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  display: inline-block !important;
+  font-family: alternate-gothic-condensed-a, sans-serif;
+  font-size: 1rem;
+  line-height: 1.3rem;
+  color: #323E48;
+  cursor: pointer;
+}
+
+.checkbox-label a {
+  color: #4a8b2c;
+  text-decoration: underline;
+}
+
+.checkbox-label a:hover {
+  color: #323E48;
+}
+
+/* ---- SUBMIT BUTTON ---- */
+.form-submit {
+  text-align: center;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+input[type="submit"] {
+  display: inline-block;
+  border: 0;
+  background: #4a8b2c;
+  color: #fff;
+  text-shadow: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-transform: uppercase;
+  font-family: alternate-gothic-condensed-a, sans-serif;
+  font-size: 16px;
+  padding: 12px 65px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+
+input[type="submit"]:hover {
+  background: #4a8b2c;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 419px) {
+  .form_fields li {
+    flex-basis: 100%;
+  }
+
+  .form-wrapper h1 {
+    font-size: 32px;
+  }
+
+  .form-wrapper .form-intro {
+    font-size: 16px;
+  }
+}
