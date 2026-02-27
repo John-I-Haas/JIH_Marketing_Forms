@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - John I. Haas</title>
-  <link rel="stylesheet" href="Web2Lead.css">
+  <link rel="stylesheet" href="LeadForm.css">
 </head>
+
 <body>
 
   <div class="form-wrapper">
-    <h1>Interested?</h1>
-    <p class="form-intro">If you'd like to order some hops, learn more about any of our innovative hops products, or just need help figuring out where to start, please fill out the following form and we'll get back to you soon.</p>
+    <h1>Are you Interested?</h1>
+    <p class="form-intro">If you'd like to order some hops, learn more about any of our innovative hops products, or
+      just need help figuring out where to start, please fill out the following form and we'll get back to you soon.</p>
 
-    <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D9M00000Ki5V8" method="POST">
+    <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D9M00000Ki5V8"
+      method="POST">
 
       <input type="hidden" name="oid" value="00D9M00000Ki5V8">
       <input type="hidden" name="retURL" value="https://www.shop.johnihaas.com/">
-
-      <!--  Debug fields (uncomment to test)
-      <input type="hidden" name="debug" value="1">
-      <input type="hidden" name="debugEmail" value="barthhaasx@salesfive.com">
+      <!--
+      <label for="Campaign_ID">Campaign</label>
+      <select type="hidden" id="Campaign_ID" name="Campaign_ID">
+        <option value="7019M00001TBlpMQAT">--None--</option>
+      </select><br>
       -->
+
+      <!--  Debug fields (uncomment to test) -->
+      <input type="hidden" name="debug" value="1">
+      <input type="hidden" name="debugEmail" value="ruben.cervantes@johnihaas.com">
+
 
       <ul class="form_fields">
 
@@ -68,14 +78,14 @@
           <div class="select-wrapper">
             <select id="country_code" name="country_code">
               <option value="">Country</option>
-<option value="AE">United Arab Emirates</option>
-<option value="GB">United Kingdom</option>
-<option value="US">United States</option>
-<option value="MX">Mexico</option>
-<option value="CA">Canada</option>
-<option value="AU">Australia</option>
-<option value="DE">Germany</option>
-<option value="GB">United Kingdom</option>
+              <option value="AE">United Arab Emirates</option>
+              <option value="GB">United Kingdom</option>
+              <option value="US">United States</option>
+              <option value="MX">Mexico</option>
+              <option value="CA">Canada</option>
+              <option value="AU">Australia</option>
+              <option value="DE">Germany</option>
+              <option value="GB">United Kingdom</option>
             </select>
           </div>
         </li>
@@ -123,14 +133,17 @@
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
             <input type="checkbox" id="00N2p0000095tEp" name="00N2p0000095tEp" value="1" required>
-            <label for="00N2p0000095tEp" class="checkbox-label">I hereby agree to the <a href="/dataprotection.html" target="_blank">data protection regulations</a> *</label>
+            <label for="00N2p0000095tEp" class="checkbox-label">I hereby agree to the <a href="/dataprotection.html"
+                target="_blank">data protection regulations</a> *</label>
           </div>
         </li>
 
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
             <input type="checkbox" id="00N2p000009TGWc" name="00N2p000009TGWc" value="1">
-            <label for="00N2p000009TGWc" class="checkbox-label">Yes, I want to continue to receive valuable information from John I. Haas and agree that they may inform me by newsletter. I can revoke this consent at any time.</label>
+            <label for="00N2p000009TGWc" class="checkbox-label">Yes, I want to continue to receive valuable information
+              from John I. Haas and agree that they may inform me by newsletter. I can revoke this consent at any
+              time.</label>
           </div>
         </li>
 
@@ -144,4 +157,5 @@
   </div>
 
 </body>
+
 </html>
