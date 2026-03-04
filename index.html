@@ -17,6 +17,8 @@
     .selector-wrapper {
       text-align: center;
       padding: 40px 20px;
+      max-width: 860px;
+      width: 100%;
     }
 
     .selector-wrapper h1 {
@@ -27,11 +29,19 @@
       margin-bottom: 40px;
     }
 
+    .selector-wrapper h2 {
+      font-family: gelica, sans-serif;
+      font-size: 24px;
+      color: #323E48;
+      margin-bottom: 20px;
+    }
+
     .selector-buttons {
       display: flex;
       gap: 20px;
       justify-content: center;
       flex-wrap: wrap;
+      margin-bottom: 50px;
     }
 
     .selector-buttons a {
@@ -51,17 +61,98 @@
     .selector-buttons a:hover {
       color: rgba(255, 255, 255, 0.7);
     }
+
+    /* ---- PRESET TEST SECTION ---- */
+    .presets-section {
+      border: 2px solid #323E48;
+      padding: 30px;
+      text-align: left;
+    }
+
+    .presets-section h2 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .presets-section .presets-note {
+      font-family: alternate-gothic-condensed-a, sans-serif;
+      font-size: 15px;
+      color: #323E48;
+      opacity: 0.6;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .presets-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .presets-grid a {
+      display: inline-block;
+      background: transparent;
+      color: #323E48;
+      border: 1px solid #323E48;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: alternate-gothic-condensed-a, sans-serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+      padding: 8px 20px;
+      transition: background 0.2s, color 0.2s;
+      flex: 0 1 calc(25% - 10px);
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .presets-grid a:hover {
+      background: #323E48;
+      color: #fdf6ef;
+    }
+
+    @media (max-width: 600px) {
+      .presets-grid a {
+        flex: 0 1 calc(50% - 10px);
+      }
+    }
   </style>
 </head>
 
 <body>
 
   <div class="selector-wrapper">
+
     <h1>Select your Form</h1>
     <div class="selector-buttons">
       <a href="LeadForm/index.html">Lead Form</a>
       <a href="CaseForm/index.html">Contact Us</a>
     </div>
+
+    <div class="presets-section">
+      <h2>Product Interest Forms</h2>
+      <p class="presets-note">Each button opens the Lead Form pre-populated with a preset subject &amp; description.</p>
+
+      <div class="presets-grid">
+        <a href="LeadForm/index.html?campaign=products">Products</a>
+        <a href="LeadForm/index.html?campaign=how-to-buy">How to Buy</a>
+        <a href="LeadForm/index.html?campaign=news-views">News &amp; Views</a>
+        <a href="LeadForm/index.html?campaign=termsandconditions">Terms &amp; Conditions</a>
+        <a href="LeadForm/index.html?campaign=contact-us">Contact Us</a>
+        <a href="LeadForm/index.html?campaign=harvest">Harvest</a>
+        <a href="LeadForm/index.html?campaign=lupomax">LupoMax</a>
+        <a href="LeadForm/index.html?campaign=lupocore">LupoCore</a>
+        <a href="LeadForm/index.html?campaign=euphorics">Euphorics</a>
+        <a href="LeadForm/index.html?campaign=incognito">Incognito</a>
+        <a href="LeadForm/index.html?campaign=spectrum">Spectrum</a>
+        <a href="LeadForm/index.html?campaign=flex">Flex</a>
+        <a href="LeadForm/index.html?campaign=prysma">Prysma</a>
+        <a href="LeadForm/index.html?campaign=pha">PHA</a>
+        <a href="LeadForm/index.html?campaign=australian-hops">Australian Hops</a>
+      </div>
+    </div>
+
   </div>
 
 </body>
