@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - John I. Haas</title>
+  <link rel="stylesheet" href="../forms.css">
+</head>
+
+<body>
+
+  <div class="form-wrapper">
+    <h1>Contact Us</h1>
+
+    <form action="https://barthhaas--poolorg14.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&amp;orgId=00D9M00000Ki5V8" method="POST">
+
+      <input type="hidden" name="orgid" value="00D9M00000Ki5V8">
+      <input type="hidden" name="retURL" value="/">
+
+      <!--  Debug fields (uncomment to test) -->
+      <input type="hidden" name="debug" value="1">
+      <input type="hidden" name="debugEmail" value="ruben.cervantes@johnihaas.com">
+      
+
+      <ul class="form_fields">
+
+        <li class="full-width">
+          <label for="00NVi000005j4ml">Contact Reason</label>
+          <div class="select-wrapper">
+            <select id="00NVi000005j4ml" name="00NVi000005j4ml" title="Contact Reason">
+              <option value="">Contact Reason</option>
+              <option value="Buy Hops">Purchase hops(Contract or Spot)</option>
+              <option value="Buy Hops">Purchase advanced products</option>
+              <option value="Request Modification / Inventory Exchange">Request contract modification</option>
+              <option value="Sales Call">Request Sales Call</option>
+              <option value="Technical Support">Request Technical Support</option>
+              <option value="Complaint">File a Complaint</option>
+              <option value="Charity">Mkt Inquiry (Charity/Sponsoring/Collaboration)</option>
+              <option value="Employment">Human Resources Inquiry (Employment)</option>
+              <option value="Employment">Finance Inquiry</option>
+              <option value="Other">General product inquiry</option>
+            </select>
+          </div>
+        </li>
+
+        <li>
+          <label for="name">Contact Name</label>
+          <input id="name" maxlength="80" name="name" type="text" placeholder="Contact Name">
+        </li>
+
+        <li>
+          <label for="company">Company</label>
+          <input id="company" maxlength="80" name="company" type="text" placeholder="Company">
+        </li>
+
+        <li>
+          <label for="email">Email</label>
+          <input id="email" maxlength="80" name="email" type="email" placeholder="Email">
+        </li>
+
+        <li>
+          <label for="phone">Phone</label>
+          <input id="phone" maxlength="40" name="phone" type="tel" placeholder="Phone">
+        </li>
+
+        <li class="full-width">
+          <label for="subject">Subject</label>
+          <input id="subject" maxlength="80" name="subject" type="text" placeholder="Subject">
+        </li>
+
+        <li class="full-width">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" placeholder="Message"></textarea>
+        </li>
+
+        <input type="hidden" name="recordType" value="012Vi0000017hXb">
+
+        <li class="full-width checkbox-field">
+          <div class="checkbox-option">
+            <input type="checkbox" id="00N2p0000095tEp" name="00N2p0000095tEp" value="1" required>
+            <label for="00N2p0000095tEp" class="checkbox-label">I hereby agree to the <a href="/dataprotection.html" target="_blank">data protection regulations</a> *</label>
+          </div>
+        </li>
+
+        <li class="full-width checkbox-field">
+          <div class="checkbox-option">
+            <input type="checkbox" id="00N2p000009TGWc" name="00N2p000009TGWc" value="1">
+            <label for="00N2p000009TGWc" class="checkbox-label">Yes, I want to continue to receive valuable information from John I. Haas and agree that they may inform me by newsletter. I can revoke this consent at any time.</label>
+          </div>
+        </li>
+
+      </ul>
+
+      <div class="form-submit">
+        <input type="submit" name="submit" value="Submit">
+      </div>
+
+    </form>
+  </div>
+
+</body>
+
+</html>
