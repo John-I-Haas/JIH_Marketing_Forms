@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - John I. Haas</title>
+  <link rel="stylesheet" href="../forms.css">
+
+  <!-- Quill -->
+  <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+
+  <!-- CKEditor 5 -->
+  <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.css">
+
+  <style>
+    /* ---- EDITOR TAB SELECTOR ---- */
+    .editor-tabs {
+      display: flex;
+      overflow: hidden;
+      border-radius: 6px 6px 0 0;
+      margin-bottom: 0;
+    }
+
+    .editor-tabs input[type="radio"] {
+      display: none;
+    }
+
+    .editor-tabs label {
+      display: block !important;
+      flex: 1;
+      padding: 10px 12px;
+      background: #e8e0d8;
+      color: #323E48;
+      cursor: pointer;
+      font-family: alternate-gothic-condensed-a, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      text-align: center;
+      border-right: 2px solid #fdf6ef;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .editor-tabs label:last-of-type {
+      border-right: 0;
+    }
+
+    .editor-tabs input[type="radio"]:checked + label {
+      background: #4a8b2c;
+      color: #fff;
+    }
+
+    .editor-tabs label:hover {
+      background: #323E48;
+      color: #fdf6ef;
+    }
+
+    /* ---- QUILL ---- */
+    .ql-toolbar.ql-snow {
+      background: #fff;
+      border: 0;
+      border-bottom: 1px solid #e8e0d8;
+      font-family: alternate-gothic-condensed-a, sans-serif;
+    }
+
+    .ql-container.ql-snow {
+      background: #fff;
+      border: 0;
+      border-radius: 0 0 6px 6px;
+      font-family: alternate-gothic-condensed-a, sans-serif;
+      font-size: 16px;
+      color: #323E48;
+    }
+
+    .ql-editor { min-height: 150px; }
+
+    .ql-editor.ql-blank::before {
+      color: #323E48;
+      font-style: normal;
+      opacity: 0.6;
+    }
+
+    .ql-snow .ql-stroke { stroke: #323E48; }
+    .ql-snow .ql-fill   { fill:   #323E48; }
+
+    .ql-snow.ql-toolbar button:hover .ql-stroke,
+    .ql-snow.ql-toolbar button.ql-active .ql-stroke { stroke: #4a8b2c; }
+
+    .ql-snow.ql-toolbar button:hover .ql-fill,
+    .ql-snow.ql-toolbar button.ql-active .ql-fill   { fill: #4a8b2c; }
+
+    /* ---- CKEDITOR 5 ---- */
+    .ck.ck-editor__main > .ck-editor__editable {
+      min-height: 150px;
+      border-radius: 0 0 6px 6px !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      font-family: alternate-gothic-condensed-a, sans-serif;
+      font-size: 16px;
+      color: #323E48;
+    }
+
+    .ck.ck-toolbar {
+      border: 0 !important;
+      border-bottom: 1px solid #e8e0d8 !important;
+      border-radius: 0 !important;
+      background: #fff !important;
+    }
+
+    .ck.ck-editor {
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: none !important;
+    }
+
+    /* ---- PLAIN TEXT FALLBACK ---- */
+    .plain-editor {
+      width: 100%;
+      min-height: 150px;
+      background: #fff;
+      border: 0;
+      border-radius: 0 0 6px 6px;
+      padding: 12px 15px;
+      font-family: alternate-gothic-condensed-a, sans-serif;
+      font-size: 16px;
+      color: #323E48;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+
+    .plain-editor::placeholder {
+      color: #323E48;
+      opacity: 0.6;
+    }
+
+    .plain-editor:focus {
+      outline: none;
+    }
+
+    /* ---- TINYMCE — strip default border ---- */
+    .tox-tinymce {
+      border: 0 !important;
+      border-radius: 0 0 6px 6px !important;
+    }
+
+    .tox .tox-toolbar,
+    .tox .tox-toolbar__primary {
+      background: #fff !important;
+      border-bottom: 1px solid #e8e0d8 !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="form-wrapper">
+    <h1>CBC Lead</h1>
+    <p class="form-intro">If you'd like to order some hops, learn more about any of our innovative hops products, or
+      just need help figuring out where to start, please fill out the following form and we'll get back to you soon.</p>
+
+    <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D9M00000Ki5V8" method="POST">
+
+      <input type="hidden" name="oid" value="00D9M00000Ki5V8">
+      <input type="hidden" name="retURL" value="https://jih-marketing-forms.vercel.app/thankyou.html">
+
+      <!--  Debug fields (uncomment to test)
+      <input type="hidden" name="debug" value="1">
+      <input type="hidden" name="debugEmail" value="ruben.cervantes@johnihaas.com">
+      -->
+
+      <ul class="form_fields">
+
+        <li>
+          <label for="first_name">First Name</label>
+          <input id="first_name" maxlength="40" name="first_name" type="text" placeholder="First Name">
+        </li>
+
+        <li>
+          <label for="last_name">Last Name</label>
+          <input id="last_name" maxlength="80" name="last_name" type="text" placeholder="Last Name">
+        </li>
+
+        <li class="full-width">
+          <label for="email">Email</label>
+          <input id="email" maxlength="80" name="email" type="email" placeholder="Email">
+        </li>
+
+        <li>
+          <label for="company">Company</label>
+          <input id="company" maxlength="40" name="company" type="text" placeholder="Company">
+        </li>
+
+        <li>
+          <label for="lead_source">Lead Source</label>
+          <div class="select-wrapper">
+            <select id="lead_source" name="lead_source">
+              <option value="">Lead Source</option>
+              <option value="Anzeige/ Werbung">Advertising</option>
+              <option value="BrewJam - Spokane '24">BrewJam - Spokane '24</option>
+              <option value="CBC Attendee">CBC Attendee</option>
+              <option value="Cold Call/Sales Outreach">Cold Call/Sales Outreach</option>
+              <option value="CRM">CRM</option>
+              <option value="Customer event">Customer event</option>
+              <option value="Customer portal">Customer portal</option>
+              <option value="Exhibition">Exhibition</option>
+              <option value="GIST">GIST</option>
+              <option value="Google AdWords">Google AdWords</option>
+              <option value="Grower Portal">Grower Portal</option>
+              <option value="Harvest '24">Harvest '24</option>
+              <option value="Historic">Historic</option>
+              <option value="Hops Academy Customer Event">Hops Academy Customer Event</option>
+              <option value="Hops Academy Partner Event">Hops Academy Partner Event</option>
+              <option value="Inquiry phone/e-mail">Inquiry phone/e-mail</option>
+              <option value="Internal Recommendation">Internal Recommendation</option>
+              <option value="Portal">JIH Portal</option>
+              <option value="Marketing">Marketing</option>
+              <option value="MQL">MQL</option>
+              <option value="Sonstiges">Other</option>
+              <option value="Pardot">Pardot</option>
+              <option value="Partner">Partner</option>
+              <option value="PR/Trade Journal">PR/Trade Journal</option>
+              <option value="Sales Qualified">Sales Qualified</option>
+              <option value="Sales Rep">Sales Rep</option>
+              <option value="True Terpenes">True Terpenes</option>
+              <option value="Webinar">Webinar</option>
+              <option value="Webshop">Webshop</option>
+              <option value="Website BH">Website BH</option>
+              <option value="Website BHI">Website BHI</option>
+              <option value="Website BHX">Website BHX</option>
+              <option value="Website signups">Website signups</option>
+              <option value="WoM">WoM</option>
+              <option value="YVH">YVH</option>
+            </select>
+          </div>
+        </li>
+
+        <!-- Rich Notes — editor switcher. Verify field ID before deploying. -->
+        <li class="full-width">
+
+          <!-- Tab selector -->
+          <div class="editor-tabs">
+            <input type="radio" id="tab-quill"     name="editor-choice" value="quill"     checked>
+            <label for="tab-quill">Quill(Free)</label>
+            <input type="radio" id="tab-tinymce"   name="editor-choice" value="tinymce">
+            <label for="tab-tinymce">TinyMCE(paid)</label>
+            <input type="radio" id="tab-ckeditor5" name="editor-choice" value="ckeditor5">
+            <label for="tab-ckeditor5">CKEditor 5(paid)</label>
+            <input type="radio" id="tab-plain"     name="editor-choice" value="plain">
+            <label for="tab-plain">Plain Text</label>
+          </div>
+
+          <!-- Hidden input submitted to Salesforce -->
+          <input type="hidden" id="00N9M00000XXX2DUAX" name="00N9M00000XXX2DUAX">
+
+          <!-- Quill panel -->
+          <div id="panel-quill">
+            <div id="quill-editor"></div>
+          </div>
+
+          <!-- TinyMCE panel -->
+          <div id="panel-tinymce" style="display:none">
+            <textarea id="tinymce-editor"></textarea>
+          </div>
+
+          <!-- CKEditor 5 panel -->
+          <div id="panel-ckeditor5" style="display:none">
+            <div id="ckeditor5-editor"></div>
+          </div>
+
+          <!-- Plain text panel -->
+          <div id="panel-plain" style="display:none">
+            <textarea id="plain-editor" class="plain-editor" placeholder="Rich Notes"></textarea>
+          </div>
+
+        </li>
+
+      </ul>
+
+      <div class="form-submit">
+        <input type="submit" name="submit" value="Let's Takk Hops">
+      </div>
+
+    </form>
+  </div>
+
+  <!-- Editor scripts -->
+  <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+  <script src="https://cdn.tiny.cloud/1/i59yvkqek8qxjyx4lfqaajjzdcszh0hmmzfbn5emaibpbvm2/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+
+  <script>
+    var activeEditor = 'quill';
+    var ck5instance   = null;
+    var tinymceReady  = false;
+
+    // ---- Initialize Quill (default) ----
+    var quill = new Quill('#quill-editor', {
+      theme: 'snow',
+      placeholder: 'Rich Notes',
+      modules: {
+        toolbar: [
+          [{ header: [1, 2, 3, 4, false] }],
+          [{ font: [] }, { size: ['small', false, 'large', 'huge'] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ color: [] }, { background: [] }],
+          [{ align: [] }],
+          [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+          ['blockquote', 'code-block'],
+          ['link'],
+          ['clean']
+        ]
+      }
+    });
+
+    // ---- Get content from the active editor ----
+    function getContent() {
+      switch (activeEditor) {
+        case 'quill':
+          var html = quill.root.innerHTML;
+          return html === '<p><br></p>' ? '' : html;
+        case 'tinymce':
+          return tinymce.get('tinymce-editor') ? tinymce.get('tinymce-editor').getContent() : '';
+        case 'ckeditor5':
+          return ck5instance ? ck5instance.getData() : '';
+        case 'plain':
+          return document.getElementById('plain-editor').value;
+      }
+      return '';
+    }
+
+    // ---- Set content on a specific editor ----
+    function setContent(name, html) {
+      switch (name) {
+        case 'quill':
+          quill.root.innerHTML = html;
+          break;
+        case 'tinymce':
+          if (tinymce.get('tinymce-editor')) tinymce.get('tinymce-editor').setContent(html);
+          break;
+        case 'ckeditor5':
+          if (ck5instance) ck5instance.setData(html);
+          break;
+        case 'plain':
+          document.getElementById('plain-editor').value = html;
+          break;
+      }
+    }
+
+    // ---- Show only the selected panel ----
+    function showPanel(name) {
+      ['quill', 'tinymce', 'ckeditor5', 'plain'].forEach(function (n) {
+        document.getElementById('panel-' + n).style.display = (n === name) ? '' : 'none';
+      });
+    }
+
+    // ---- Handle tab switching ----
+    document.querySelectorAll('input[name="editor-choice"]').forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        var content    = getContent();
+        var newEditor  = this.value;
+
+        showPanel(newEditor);
+
+        // Lazy-init TinyMCE
+        if (newEditor === 'tinymce' && !tinymceReady) {
+          tinymce.init({
+            selector: '#tinymce-editor',
+            plugins: [
+              'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+              'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'advtemplate', 'ai', 'uploadcare', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
+            ],
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+              { value: 'First.Name', title: 'First Name' },
+              { value: 'Email', title: 'Email' }
+            ],
+            ai_request: function (request, respondWith) { respondWith.string(function () { return Promise.reject('See docs to implement AI Assistant'); }); },
+            uploadcare_public_key: '356e4fb9b9fe3b7f75a8',
+            setup: function (editor) {
+              editor.on('init', function () {
+                tinymceReady = true;
+                editor.setContent(content);
+              });
+            }
+          });
+        }
+        // Lazy-init CKEditor 5
+        else if (newEditor === 'ckeditor5' && !ck5instance) {
+          ClassicEditor.create(document.getElementById('ckeditor5-editor'), {
+            toolbar: {
+              items: [
+                'undo', 'redo',
+                '|', 'heading',
+                '|', 'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor',
+                '|', 'bold', 'italic', 'underline', 'strikethrough',
+                '|', 'alignment',
+                '|', 'numberedList', 'bulletedList', 'todoList',
+                '|', 'outdent', 'indent',
+                '|', 'link', 'blockQuote', 'insertTable', 'mediaEmbed',
+                '|', 'horizontalLine', 'specialCharacters',
+                '|', 'removeFormat'
+              ],
+              shouldNotGroupWhenFull: true
+            },
+            heading: {
+              options: [
+                { model: 'paragraph',  title: 'Paragraph',  class: 'ck-heading_paragraph' },
+                { model: 'heading1',   view: 'h1', title: 'Heading 1',  class: 'ck-heading_heading1' },
+                { model: 'heading2',   view: 'h2', title: 'Heading 2',  class: 'ck-heading_heading2' },
+                { model: 'heading3',   view: 'h3', title: 'Heading 3',  class: 'ck-heading_heading3' },
+                { model: 'heading4',   view: 'h4', title: 'Heading 4',  class: 'ck-heading_heading4' }
+              ]
+            },
+            fontFamily: {
+              options: [
+                'default',
+                'Arial, Helvetica, sans-serif',
+                'Courier New, Courier, monospace',
+                'Georgia, serif',
+                'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                'Tahoma, Geneva, sans-serif',
+                'Times New Roman, Times, serif',
+                'Trebuchet MS, Helvetica, sans-serif',
+                'Verdana, Geneva, sans-serif'
+              ],
+              supportAllValues: true
+            },
+            fontSize: {
+              options: [10, 11, 12, 13, 14, 16, 18, 20, 22, 24, 28, 32, 36],
+              supportAllValues: true
+            },
+            fontColor: {
+              columns: 5,
+              colors: [
+                { color: '#323E48', label: 'Dark Blue' },
+                { color: '#4a8b2c', label: 'JIH Green' },
+                { color: '#000000', label: 'Black' },
+                { color: '#ffffff', label: 'White', hasBorder: true },
+                { color: '#e74c3c', label: 'Red' },
+                { color: '#e67e22', label: 'Orange' },
+                { color: '#f1c40f', label: 'Yellow' },
+                { color: '#2ecc71', label: 'Green' },
+                { color: '#3498db', label: 'Blue' },
+                { color: '#9b59b6', label: 'Purple' }
+              ]
+            },
+            fontBackgroundColor: {
+              columns: 5,
+              colors: [
+                { color: '#fdf6ef', label: 'Cream' },
+                { color: '#323E48', label: 'Dark Blue' },
+                { color: '#4a8b2c', label: 'JIH Green' },
+                { color: '#fef9c3', label: 'Yellow' },
+                { color: '#fee2e2', label: 'Red' },
+                { color: '#dbeafe', label: 'Blue' },
+                { color: '#dcfce7', label: 'Green' },
+                { color: '#f3e8ff', label: 'Purple' },
+                { color: '#ffedd5', label: 'Orange' },
+                { color: '#f1f5f9', label: 'Gray' }
+              ]
+            },
+            table: {
+              contentToolbar: [
+                'tableColumn', 'tableRow', 'mergeTableCells',
+                '|', 'tableProperties', 'tableCellProperties'
+              ]
+            },
+            link: {
+              decorators: {
+                openInNewTab: {
+                  mode: 'manual',
+                  label: 'Open in a new tab',
+                  attributes: { target: '_blank', rel: 'noopener noreferrer' }
+                }
+              }
+            }
+          }).then(function (editor) {
+            ck5instance = editor;
+            editor.setData(content);
+          });
+        }
+        // Already initialized — just transfer content
+        else {
+          setContent(newEditor, content);
+        }
+
+        activeEditor = newEditor;
+      });
+    });
+
+    // ---- On submit: write active editor content to hidden input ----
+    document.querySelector('form').addEventListener('submit', function () {
+      document.getElementById('00N9M00000XXX2DUAX').value = getContent();
+    });
+  </script>
+
+  <script src="../forms.js"></script>
+</body>
+
+</html>
