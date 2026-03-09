@@ -7,6 +7,11 @@
     ? scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1) + 'presets.json'
     : '../presets.json';
 
+  // Maps human-readable preset keys to Salesforce field name attributes
+  var fieldAliases = {
+    'lead_source_detail': '00N2p0000097UMz'
+  };
+
   function applyPreset(preset) {
     Object.keys(preset).forEach(function (key) {
       var value = preset[key];
@@ -24,7 +29,8 @@
         }
         existing.value = value;
       } else {
-        var field = document.querySelector('[name="' + key + '"]');
+        var sfName = fieldAliases[key] || key;
+        var field = document.querySelector('[name="' + sfName + '"]');
         if (field) field.value = value;
       }
     });

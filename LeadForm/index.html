@@ -37,12 +37,12 @@
 
         <li>
           <label for="last_name">Last Name</label>
-          <input id="last_name" maxlength="80" name="last_name" type="text" placeholder="Last Name">
+          <input id="last_name" maxlength="80" name="last_name" type="text" placeholder="Last Name" required>
         </li>
 
         <li class="full-width">
           <label for="email">Email</label>
-          <input id="email" maxlength="80" name="email" type="email" placeholder="Email">
+          <input id="email" maxlength="80" name="email" type="email" placeholder="Email" required>
         </li>
 
         <li>
@@ -128,22 +128,27 @@
 
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
-            <input type="checkbox" id="00N2p0000095tEp" name="00N2p0000095tEp" value="1" required>
-            <label for="00N2p0000095tEp" class="checkbox-label">I hereby agree to the <a href="/dataprotection.html"
+            <input type="checkbox" id="data-consent" name="00N9M00000Xl7Pd" value="1" required>
+            <label for="data-consent" class="checkbox-label">I hereby agree to the <a href="/dataprotection.html"
                 target="_blank">data protection regulations</a> *</label>
           </div>
         </li>
 
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
-            <input type="checkbox" id="00N2p000009TGWc" name="00N2p000009TGWc" value="1">
-            <label for="00N2p000009TGWc" class="checkbox-label">Yes, I want to continue to receive valuable information
+            <input type="checkbox" id="newsletter-consent" name="00N9M00000Xl7EL" value="1">
+            <label for="newsletter-consent" class="checkbox-label">Yes, I want to continue to receive valuable information
               from John I. Haas and agree that they may inform me by newsletter. I can revoke this consent at any
               time.</label>
           </div>
         </li>
 
       </ul>
+
+      <!-- Hidden fields populated by JS — valid lead_source values: YVH, Webshop, Website signups, Marketing, Customer portal, CBC Attendee -->
+      <input type="hidden" id="lead_source" name="lead_source" value="">
+      <!-- Lead Source Detail: free-text companion to lead_source, set by JS -->
+      <input type="hidden" id="00N2p0000097UMz" name="00N2p0000097UMz" value="">
 
       <div class="form-submit">
         <input type="submit" name="submit" value="Let's Takk Hops">

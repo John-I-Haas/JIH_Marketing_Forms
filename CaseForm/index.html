@@ -19,10 +19,10 @@
       <!-- retURL must be an absolute URL when deployed — update to match the hosted domain -->
       <input type="hidden" name="retURL" value="https://jih-marketing-forms.vercel.app/thankyou.html">
 
-      <!--  Debug fields (uncomment to test)
+      <!--  Debug fields (uncomment to test) -->
       <input type="hidden" name="debug" value="1">
       <input type="hidden" name="debugEmail" value="ruben.cervantes@johnihaas.com">
-      -->
+      
 
       <ul class="form_fields">
 
@@ -79,15 +79,16 @@
 
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
-            <input type="checkbox" id="00N2p0000095tEp" name="00N2p0000095tEp" value="1" required>
-            <label for="00N2p0000095tEp" class="checkbox-label">I hereby agree to the <a href="/dataprotection.html" target="_blank">data protection regulations</a> *</label>
+            <!-- Required gate — not submitted to Salesforce -->
+            <input type="checkbox" id="data-consent-gate" required>
+            <label for="data-consent-gate" class="checkbox-label">I hereby agree to the <a href="/dataprotection.html" target="_blank">data protection regulations</a> *</label>
           </div>
         </li>
 
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
-            <input type="checkbox" id="00N2p000009TGWc" name="00N2p000009TGWc" value="1">
-            <label for="00N2p000009TGWc" class="checkbox-label">Yes, I want to continue to receive valuable information from John I. Haas and agree that they may inform me by newsletter. I can revoke this consent at any time.</label>
+            <input type="checkbox" id="00N9M00000XlFv3" name="00N9M00000XlFv3" value="1">
+            <label for="00N9M00000XlFv3" class="checkbox-label">Yes, I want to continue to receive valuable information from John I. Haas and agree that they may inform me by newsletter. I can revoke this consent at any time.</label>
           </div>
         </li>
 
