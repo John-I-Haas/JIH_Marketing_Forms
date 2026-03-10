@@ -263,6 +263,92 @@ input[type="submit"]:hover {
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* ---- SHOW MORE TOGGLE ---- */
+.show-more-toggle {
+  width: 100%;
+  background: none;
+  border: 0;
+  border-top: 1px solid #e8e0d8;
+  padding: 10px 0;
+  font-family: alternate-gothic-condensed-a, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #323E48;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-align: left;
+}
+
+.show-more-toggle:hover {
+  color: #4a8b2c;
+}
+
+.show-more-toggle .toggle-icon {
+  display: inline-block;
+  transition: transform 0.2s;
+  font-size: 10px;
+}
+
+.show-more-toggle.open .toggle-icon {
+  transform: rotate(90deg);
+}
+
+.extra-field {
+  display: none;
+}
+
+/* ---- QUILL RICH TEXT EDITOR ---- */
+.ql-toolbar.ql-snow {
+  background: #fff;
+  border: 0;
+  border-bottom: 1px solid #e8e0d8;
+  border-radius: 6px 6px 0 0;
+  font-family: alternate-gothic-condensed-a, sans-serif;
+}
+
+.ql-container.ql-snow {
+  background: #fff;
+  border: 0;
+  border-radius: 0 0 6px 6px;
+  font-family: alternate-gothic-condensed-a, sans-serif;
+  font-size: 16px;
+  color: #323E48;
+  height: auto;
+  min-height: 150px;
+}
+
+.ql-editor {
+  height: auto;
+  min-height: 150px;
+}
+
+.ql-editor.ql-blank::before {
+  color: #323E48;
+  font-style: normal;
+  opacity: 1;
+}
+
+.ql-snow .ql-stroke {
+  stroke: #323E48;
+}
+
+.ql-snow .ql-fill {
+  fill: #323E48;
+}
+
+.ql-snow.ql-toolbar button:hover .ql-stroke,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke {
+  stroke: #4a8b2c;
+}
+
+.ql-snow.ql-toolbar button:hover .ql-fill,
+.ql-snow.ql-toolbar button.ql-active .ql-fill {
+  fill: #4a8b2c;
+}
+
 /* ---- RESPONSIVE ---- */
 @media (max-width: 419px) {
   .form_fields li {
