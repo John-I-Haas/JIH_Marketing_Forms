@@ -2,105 +2,105 @@
   "products": {
     "subject": "General Product Inquiry",
     "description": "I am interested in learning more about the full range of John I. Haas products. Please send me more information or have a representative reach out.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "how-to-buy": {
     "subject": "Interested in Purchasing Hops",
     "description": "I would like to learn more about purchasing hops from John I. Haas — whether through contract or spot market. Please contact me to discuss options.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "news-views": {
     "subject": "News & Views — Stay Connected",
     "description": "I came across your latest news and would like to receive more information and stay up to date with John I. Haas updates, market insights, and new product launches.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "termsandconditions": {
     "subject": "Terms & Conditions Inquiry",
     "description": "I have a question regarding the terms and conditions of purchasing or partnering with John I. Haas. Please have someone from your team get in touch.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "contact-us": {
     "subject": "General Contact Request",
     "description": "I would like to get in touch with the John I. Haas team. Please reach out at your earliest convenience.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "harvest": {
     "subject": "Hop Harvest Inquiry",
     "description": "I am interested in information about the upcoming hop harvest — including availability, timing, and variety outlook. Please share any relevant updates or forecasts.",
-    "Campaign_ID": "",
+    "campaign_name": "JIH_Newsletter_Harvest_2024",
     "lead_source": "Marketing",
     "lead_source_detail": "JIH_Marketing_Forms"
   },
   "lupomax": {
     "subject": "LupoMax® Product Inquiry",
     "description": "I am interested in LupoMax®, your concentrated hop pellet solution. I would like to learn more about its applications, availability, and how to incorporate it into my brewing process.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "lupocore": {
     "subject": "LupoCore® Product Inquiry",
     "description": "I would like to learn more about LupoCore® and how it can benefit my brewing operation. Please provide product details, technical specifications, and availability.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "euphorics": {
     "subject": "Euphorics™ Hop Inquiry",
     "description": "I am interested in the Euphorics™ hop variety and would like more information on flavor profile, availability, and how to source it for my brewery.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "incognito": {
     "subject": "Incognito® Hop Extract Inquiry",
     "description": "I am interested in Incognito®, your liquid hop extract product. I would like to discuss brewing applications, pricing, and how to get started.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "spectrum": {
     "subject": "Spectrum™ Hop Inquiry",
     "description": "I came across the Spectrum™ hop variety and would like to learn more about its aromatic profile, availability, and suitability for my brewing recipes.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "flex": {
     "subject": "Flex™ Hop Inquiry",
     "description": "I am interested in the Flex™ hop variety and its versatility across different beer styles. Please share more details on availability and how to purchase.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "prysma": {
     "subject": "Prysma™ Hop Inquiry",
     "description": "I would like to find out more about the Prysma™ hop variety — its flavor characteristics, harvest availability, and purchasing options.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "pha": {
     "subject": "Pure Hop Alpha (PHA) Inquiry",
     "description": "I am interested in learning more about your Pure Hop Alpha products, their bittering efficiency, and how to integrate them into my brewing process.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   },
   "australian-hops": {
     "subject": "Australian Hops Inquiry",
     "description": "I am interested in exploring Australian hop varieties offered by John I. Haas. Please provide information on available varieties, flavor profiles, and sourcing options.",
-    "Campaign_ID": "",
+    "campaign_name": "",
     "lead_source": "",
     "lead_source_detail": ""
   }

@@ -9,30 +9,17 @@
 
   // Maps human-readable preset keys to Salesforce field name attributes
   var fieldAliases = {
-    'lead_source_detail': '00N2p0000097UMz'
+    'lead_source_detail': '00N2p0000097UMz',
+    'campaign_name':      '00N9M00000XtQID'
   };
 
   function applyPreset(preset) {
     Object.keys(preset).forEach(function (key) {
       var value = preset[key];
       if (!value) return;
-
-      if (key === 'Campaign_ID') {
-        // Dynamically inject a hidden Campaign_ID field — only when preset defines one
-        var existing = document.querySelector('[name="Campaign_ID"]');
-        if (!existing) {
-          var hidden = document.createElement('input');
-          hidden.type = 'hidden';
-          hidden.name = 'Campaign_ID';
-          document.querySelector('form').appendChild(hidden);
-          existing = hidden;
-        }
-        existing.value = value;
-      } else {
-        var sfName = fieldAliases[key] || key;
-        var field = document.querySelector('[name="' + sfName + '"]');
-        if (field) field.value = value;
-      }
+      var sfName = fieldAliases[key] || key;
+      var field = document.querySelector('[name="' + sfName + '"]');
+      if (field) field.value = value;
     });
   }
 
