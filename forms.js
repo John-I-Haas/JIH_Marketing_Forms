@@ -1,3 +1,15 @@
+// Template CSS injection — runs immediately when script is parsed in <head>
+(function () {
+  var template = new URLSearchParams(location.search).get('template');
+  if (!template) return;
+  var scriptSrc = document.currentScript ? document.currentScript.src : '';
+  var base = scriptSrc ? scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1) : '../';
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = base + 'templates/' + template + '.css';
+  document.head.appendChild(link);
+})();
+
 (function () {
   var allowedTypes = ['text', 'email', 'tel', 'textarea', 'select-one'];
 

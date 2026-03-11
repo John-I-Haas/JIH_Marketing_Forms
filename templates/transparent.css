@@ -1,0 +1,11 @@
+/* Transparent iframe overrides — layer on top of forms.css */
+html, body {
+  background: none transparent;
+  background-color: transparent;
+}
+
+.form-wrapper h1           { color: #fff; }
+.form-wrapper .form-intro  { color: rgba(255,255,255,0.85); }
+.checkbox-label            { color: rgba(255,255,255,0.9) !important; }
+.checkbox-label a          { color: #c8e6a0; }
+.checkbox-label a:hover    { color: #fff; }

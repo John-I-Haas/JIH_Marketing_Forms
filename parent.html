@@ -201,7 +201,6 @@
     /* ── SECTION 3: PARALLAX ── */
     .parallax-section {
       position: relative;
-      min-height: 520px;
       background-image: url('https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=1800&q=80');
       background-attachment: fixed;
       background-size: cover;
@@ -223,6 +222,7 @@
       text-align: center;
       color: #fff;
       padding: 60px 48px;
+      width: 100%;
     }
 
     .parallax-content h2 {
@@ -502,9 +502,13 @@
   <section class="parallax-section">
     <div class="parallax-overlay"></div>
     <div class="parallax-content">
-      <h2>Contact Us</h2>
-      <p>Have a question about sourcing, partnerships, or our products? We'd love to hear from you.</p>
-      <!-- iframe will go here -->
+      <iframe
+        src="http://localhost:3001/LeadForm/index.html?template=transparent"
+        frameborder="0"
+        allowtransparency="true"
+        scrolling="no"
+        style="background: transparent; border: none; width: 100%; max-width: 720px; min-height: 920px; display: block; margin: 0 auto;"
+      ></iframe>
     </div>
   </section>
 
