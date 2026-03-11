@@ -143,8 +143,10 @@ To make the iframe background invisible so the parent page's background shows th
 ></iframe>
 ```
 
-> **Important — same-origin requirement for transparency:**
-> True CSS transparency through an iframe only works reliably when the parent page and the iframe are served from the **same origin** (same domain). When embedding on a third-party domain, the browser treats the iframe as cross-origin and the background will typically render opaque regardless of the `transparent` template. In that case, use `?template=dark` or `?template=light` to match the host page's colour scheme instead.
+> **Cross-origin note:**
+> CSS transparency works cross-origin without any issues. The browser's same-origin policy restricts JavaScript from reading another domain's DOM — it does not affect visual rendering or compositing. `allowtransparency` + `background: transparent` will work whether the parent page and the form are on the same domain or different domains.
+>
+> The only cross-origin limitation is that JavaScript on the parent page cannot read the iframe's content height. This is why a fixed `min-height` is used. For dynamic auto-resizing, see the **Iframe height** section below.
 
 ---
 
@@ -199,9 +201,11 @@ The corresponding CSS for the parallax container:
 
 ---
 
-### Sizing
+### Iframe height
 
 The form has no fixed height — it grows with its content. Set `min-height` on the iframe to avoid a scrollbar appearing inside it. A value of **`920px`** covers the full form at desktop width.
+
+For dynamic height (auto-resize as content changes), JavaScript on the parent page cannot read a cross-origin iframe's height directly. The solution is `postMessage` — the form reports its own height and the parent adjusts the iframe. The [iframeResizer](https://github.com/davidjbradshaw/iframe-resizer) library handles this with minimal setup and works cross-origin.
 
 The 2-column field layout activates when the **iframe's rendered width** exceeds `420px`. Ensure the container gives the iframe enough room to reach that width, otherwise all fields will stack in a single column.
 

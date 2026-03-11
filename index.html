@@ -117,6 +117,54 @@
         flex: 0 1 calc(50% - 10px);
       }
     }
+
+    /* ---- TEMPLATE PICKER ---- */
+    .template-picker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+      margin-bottom: 36px;
+    }
+
+    .template-picker label {
+      font-family: alternate-gothic-condensed-a, sans-serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #323E48;
+      margin-right: 12px;
+    }
+
+    .template-picker input[type="radio"] {
+      display: none;
+    }
+
+    .template-picker .tpl-btn {
+      display: inline-block;
+      border: 1px solid #323E48;
+      color: #323E48;
+      padding: 7px 20px;
+      font-family: alternate-gothic-condensed-a, sans-serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      user-select: none;
+    }
+
+    .template-picker input[type="radio"]:checked + .tpl-btn {
+      background: #323E48;
+      color: #fdf6ef;
+    }
+
+    .template-picker .tpl-btn:hover {
+      background: #323E48;
+      color: #fdf6ef;
+    }
   </style>
 </head>
 
@@ -125,6 +173,7 @@
   <div class="selector-wrapper">
 
     <h1>Select your Form</h1>
+
     <div class="selector-buttons">
       <a href="LeadForm/index.html">Lead Form</a>
       <a href="CaseForm/index.html">Contact Us</a>
@@ -153,11 +202,52 @@
       </div>
     </div>
 
-    <div class="selector-buttons" style="margin-top: 50px;">
+    <div class="template-picker">
+      <label>Template:</label>
+      <input type="radio" name="tpl" id="tpl-none" value="" checked>
+      <label for="tpl-none" class="tpl-btn">None</label>
+      <input type="radio" name="tpl" id="tpl-transparent" value="transparent">
+      <label for="tpl-transparent" class="tpl-btn">Transparent</label>
+      <input type="radio" name="tpl" id="tpl-dark" value="dark">
+      <label for="tpl-dark" class="tpl-btn">Dark</label>
+      <input type="radio" name="tpl" id="tpl-light" value="light">
+      <label for="tpl-light" class="tpl-btn">Light</label>
+    </div>
+
+    <div class="selector-buttons" style="margin-top: 0;">
       <a href="LeadForm/CBCForm.html">CBC Form</a>
     </div>
-v1.0
+
+    <div class="selector-buttons" style="margin-top: 30px;">
+      <a href="parent.html">Example Embedding</a>
+    </div>
+v2.0
   </div>
+
+  <script>
+    // Store original hrefs once on load
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      a.dataset.baseHref = a.href;
+    });
+
+    function updateLinks(template) {
+      document.querySelectorAll('a[data-base-href]').forEach(function (a) {
+        var url = new URL(a.dataset.baseHref);
+        if (template) {
+          url.searchParams.set('template', template);
+        } else {
+          url.searchParams.delete('template');
+        }
+        a.href = url.toString();
+      });
+    }
+
+    document.querySelectorAll('input[name="tpl"]').forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        updateLinks(this.value);
+      });
+    });
+  </script>
 </body>
 
 </html>
