@@ -1,0 +1,56 @@
+/* Light theme — clean white, inspired by johnihaas.com content sections */
+
+html, body {
+  background-color: #ffffff;
+}
+
+/* Headings & intro — keep brand dark charcoal */
+.form-wrapper h1          { color: #323E48; }
+.form-wrapper .form-intro { color: #323E48; }
+
+/* Text inputs — warm cream bg with a subtle border so they read on white */
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  background-color: #f5efe8;
+  border: 1px solid #ddd5cc;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus {
+  background-color: #fdf6ef;
+  border-color: #b8a898;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #7a8a94;
+  opacity: 1;
+}
+
+/* Select */
+.select-wrapper {
+  background: #f5efe8;
+  border: 1px solid #ddd5cc;
+}
+
+select {
+  color: #323E48;
+}
+
+/* Textarea */
+textarea {
+  background-color: #f5efe8;
+  border: 1px solid #ddd5cc;
+}
+
+textarea:focus {
+  background-color: #fdf6ef;
+  border-color: #b8a898;
+}
+
+/* Checkboxes */
+.checkbox-label           { color: #323E48 !important; }
+.checkbox-label a         { color: #4a8b2c; }
+.checkbox-label a:hover   { color: #323E48; }

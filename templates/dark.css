@@ -1,0 +1,57 @@
+/* Dark theme — inspired by johnihaas.com dark hero/footer sections */
+
+html, body {
+  background-color: #1a2530;
+}
+
+/* Headings & intro */
+.form-wrapper h1          { color: #ffffff; }
+.form-wrapper .form-intro { color: rgba(255,255,255,0.75); }
+
+/* Text inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  background-color: #253040;
+  color: #ffffff;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus {
+  background-color: #2c3a4d;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255,255,255,0.4);
+  opacity: 1;
+}
+
+/* Select */
+.select-wrapper {
+  background: #253040;
+}
+
+.select-wrapper::after {
+  border-color: rgba(255,255,255,0.5) transparent transparent transparent;
+}
+
+select {
+  color: #ffffff;
+}
+
+/* Textarea */
+textarea {
+  background-color: #253040;
+  color: #ffffff;
+}
+
+textarea:focus {
+  background-color: #2c3a4d;
+}
+
+/* Checkboxes */
+.checkbox-label           { color: rgba(255,255,255,0.85) !important; }
+.checkbox-label a         { color: #a8d878; }
+.checkbox-label a:hover   { color: #ffffff; }
