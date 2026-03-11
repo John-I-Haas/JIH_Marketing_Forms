@@ -1,38 +1,7 @@
 {
-  "products": {
-    "subject": "General Product Inquiry",
-    "description": "I am interested in learning more about the full range of John I. Haas products. Please send me more information or have a representative reach out.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
-  },
   "how-to-buy": {
     "subject": "Interested in Purchasing Hops",
-    "description": "I would like to learn more about purchasing hops from John I. Haas — whether through contract or spot market. Please contact me to discuss options.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
-  },
-  "news-views": {
-    "subject": "News & Views — Stay Connected",
-    "description": "I came across your latest news and would like to receive more information and stay up to date with John I. Haas updates, market insights, and new product launches.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
-  },
-  "termsandconditions": {
-    "subject": "Terms & Conditions Inquiry",
-    "description": "I have a question regarding the terms and conditions of purchasing or partnering with John I. Haas. Please have someone from your team get in touch.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
-  },
-  "contact-us": {
-    "subject": "General Contact Request",
-    "description": "I would like to get in touch with the John I. Haas team. Please reach out at your earliest convenience.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
+    "description": "I would like to learn more about purchasing hops from John I. Haas — whether through contract or spot market. Please contact me to discuss options."
   },
   "harvest": {
     "subject": "Hop Harvest Inquiry",
@@ -43,65 +12,50 @@
   },
   "lupomax": {
     "subject": "LupoMax® Product Inquiry",
-    "description": "I am interested in LupoMax®, your concentrated hop pellet solution. I would like to learn more about its applications, availability, and how to incorporate it into my brewing process.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
+    "description": "I am interested in learning more about LupoMax®. Please send me more information or have a representative reach out."
   },
   "lupocore": {
     "subject": "LupoCore® Product Inquiry",
-    "description": "I would like to learn more about LupoCore® and how it can benefit my brewing operation. Please provide product details, technical specifications, and availability.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
+    "description": "I am interested in learning more about LupoCore®. Please send me more information or have a representative reach out."
   },
   "euphorics": {
     "subject": "Euphorics™ Hop Inquiry",
-    "description": "I am interested in the Euphorics™ hop variety and would like more information on flavor profile, availability, and how to source it for my brewery.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
+    "description": "I am interested in learning more about Euphorics™. Please send me more information or have a representative reach out."
   },
   "incognito": {
     "subject": "Incognito® Hop Extract Inquiry",
-    "description": "I am interested in Incognito®, your liquid hop extract product. I would like to discuss brewing applications, pricing, and how to get started.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
+    "description": "I am interested in learning more about Incognito®. Please send me more information or have a representative reach out."
   },
   "spectrum": {
     "subject": "Spectrum™ Hop Inquiry",
-    "description": "I came across the Spectrum™ hop variety and would like to learn more about its aromatic profile, availability, and suitability for my brewing recipes.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
+    "description": "I am interested in learning more about Spectrum™. Please send me more information or have a representative reach out."
   },
   "flex": {
     "subject": "Flex™ Hop Inquiry",
-    "description": "I am interested in the Flex™ hop variety and its versatility across different beer styles. Please share more details on availability and how to purchase.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
+    "description": "I am interested in learning more about Flex™. Please send me more information or have a representative reach out."
   },
   "prysma": {
     "subject": "Prysma™ Hop Inquiry",
-    "description": "I would like to find out more about the Prysma™ hop variety — its flavor characteristics, harvest availability, and purchasing options.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
+    "description": "I am interested in learning more about Prysma™. Please send me more information or have a representative reach out."
   },
   "pha": {
     "subject": "Pure Hop Alpha (PHA) Inquiry",
-    "description": "I am interested in learning more about your Pure Hop Alpha products, their bittering efficiency, and how to integrate them into my brewing process.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
+    "description": "I am interested in learning more about Pure Hop Alpha (PHA). Please send me more information or have a representative reach out."
   },
   "australian-hops": {
     "subject": "Australian Hops Inquiry",
-    "description": "I am interested in exploring Australian hop varieties offered by John I. Haas. Please provide information on available varieties, flavor profiles, and sourcing options.",
-    "campaign_name": "",
-    "lead_source": "",
-    "lead_source_detail": ""
+    "description": "I am interested in learning more about Australian hops. Please send me more information or have a representative reach out."
+  },
+  "kettle-redi": {
+    "subject": "Kettle Redi Inquiry",
+    "description": "I am interested in learning more about Kettle Redi. Please send me more information or have a representative reach out."
+  },
+  "hop-haze": {
+    "subject": "Hop Haze Inquiry",
+    "description": "I am interested in learning more about Hop Haze. Please send me more information or have a representative reach out."
+  },
+  "hop-aid": {
+    "subject": "Hop Aid Inquiry",
+    "description": "I am interested in learning more about Hop Aid. Please send me more information or have a representative reach out."
   }
 }
