@@ -12,9 +12,6 @@
 <body>
 
   <div class="form-wrapper">
-    <h1>Are you Interested?</h1>
-    <p class="form-intro">If you'd like to order some hops, learn more about any of our innovative hops products, or
-      just need help figuring out where to start, please fill out the following form and we'll get back to you soon.</p>
 
     <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D9M00000Ki5V8"
       method="POST">
@@ -110,7 +107,7 @@
           <label for="industry">Industry</label>
           <div class="select-wrapper">
             <select id="industry" name="industry">
-              <option value="">Industry</option>
+              <option value="">--- Select Industry ---</option>
               <option value="Brewery">Brewery</option>
               <option value="Flavor House">Flavor House</option>
               <option value="Food">Food</option>
@@ -133,7 +130,7 @@
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
             <input type="checkbox" id="data-consent" name="00N9M00000Xl7Pd" value="1" required>
-            <label for="data-consent" class="checkbox-label">I have read and agree to the John I. Haas <a href="/dataprotection.html" target="_blank">Privacy Policy</a>. *</label>
+            <label for="data-consent" class="checkbox-label">I have read and agree to the John I. Haas <a href="https://www.johnihaas.com/privacy-policy/" target="_blank">Privacy Policy</a>. *</label>
           </div>
         </li>
 
@@ -146,8 +143,8 @@
 
       </ul>
 
-      <!-- Hidden fields populated by JS — valid lead_source values: YVH, Webshop, Website signups, Marketing, Customer portal, CBC Attendee -->
-      <input type="hidden" id="lead_source" name="lead_source" value="">
+      <!-- Hidden fields populated by JS — valid lead_source values: JIH Marketing Forms, YVH, Webshop, Website signups, Marketing, Customer portal, CBC Attendee -->
+      <input type="hidden" id="lead_source" name="lead_source" value="JIH Marketing Forms">
       <!-- Lead Source Detail: free-text companion to lead_source, set by JS -->
       <input type="hidden" id="00N2p0000097UMz" name="00N2p0000097UMz" value="">
 

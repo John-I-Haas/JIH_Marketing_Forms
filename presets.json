@@ -1,21 +1,21 @@
 {
   "how-to-buy": {
     "subject": "Interested in Purchasing Hops",
-    "description": "I would like to learn more about purchasing hops from John I. Haas — whether through contract or spot market. Please contact me to discuss options."
+    "description": "I am interested in learning more about the full range of John I. Haas products. Please send me more information or have a representative reach out."
   },
   "harvest": {
     "subject": "Hop Harvest Inquiry",
-    "description": "I am interested in information about the upcoming hop harvest — including availability, timing, and variety outlook. Please share any relevant updates or forecasts.",
-    "campaign_name": "JIH_Newsletter_Harvest_2024",
-    "lead_source": "Marketing",
-    "lead_source_detail": "JIH_Marketing_Forms"
+    "description": "I am interested in information about the upcoming hop harvest, including selection options, availability and timing. Please send me more information or have a representative reach out.",
+    "campaign_name": "Incognito 2026"
   },
   "lupomax": {
     "subject": "LupoMax® Product Inquiry",
+    "campaign_name": "JIH_OtherCampaign",
     "description": "I am interested in learning more about LupoMax®. Please send me more information or have a representative reach out."
   },
   "lupocore": {
     "subject": "LupoCore® Product Inquiry",
+    "campaign_name": "JIH_OtherCampaign",
     "description": "I am interested in learning more about LupoCore®. Please send me more information or have a representative reach out."
   },
   "euphorics": {
@@ -40,7 +40,7 @@
   },
   "pha": {
     "subject": "Pure Hop Alpha (PHA) Inquiry",
-    "description": "I am interested in learning more about Pure Hop Alpha (PHA). Please send me more information or have a representative reach out."
+    "description": "I am interested in learning more about PHAs (Precision in Hop Aroma). Please send me more information or have a representative reach out."
   },
   "australian-hops": {
     "subject": "Australian Hops Inquiry",
