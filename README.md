@@ -96,12 +96,34 @@ https://jih-marketing-forms.vercel.app/LeadForm/index.html?company=Acme+Brewing&
 
 ---
 
+### `?org=`
+
+Switches the Salesforce org the form submits to at runtime. This swaps the form `action` URL, the hidden org ID (`oid`/`orgid`), and all custom field IDs without any changes to the HTML.
+
+Config files live in `configs/{org}.json`. Available values:
+
+| Value | Org | Notes |
+|---|---|---|
+| *(none)* | **poolorg14** (hardcoded default) | Current development sandbox — IDs are baked into the HTML |
+| `poolorg14` | BarthHaas poolorg14 sandbox | Same as the hardcoded defaults |
+| `uat` | BarthHaas UAT (`barthhaas--uat`) | UAT sandbox |
+| `poolorg1` | BarthHaas poolorg1 sandbox | Partial field mapping |
+
+> **Production note:** The hardcoded defaults in the HTML currently point to **poolorg14** (development). When production IDs are available, either update the HTML directly or add a `configs/prod.json` and use `?org=prod`.
+
+**Example:**
+```
+https://jih-marketing-forms.vercel.app/LeadForm/index.html?org=uat
+```
+
+---
+
 ### Combining parameters
 
 All parameters can be combined freely:
 
 ```
-https://jih-marketing-forms.vercel.app/LeadForm/index.html?template=dark&campaign=harvest&company=Acme+Brewing&country_code=US
+https://jih-marketing-forms.vercel.app/LeadForm/index.html?org=uat&template=dark&campaign=harvest&company=Acme+Brewing&country_code=US
 ```
 
 ---
@@ -222,17 +244,25 @@ The 2-column field layout activates when the **iframe's rendered width** exceeds
 
 ```
 LeadForm/
-  index.html              ← The form (single file, all variants via URL params)
+  index.html              ← Lead form (single file, all variants via URL params)
   transparent_index.html  ← Legacy alias — loads same form with transparent template
 
+CaseForm/
+  index.html              ← Case / contact form
+
 forms.css                 ← Base styles (typography, layout, inputs)
-forms.js                  ← Template injection + field pre-population + preset loading
+forms.js                  ← Org config + template injection + field pre-population + preset loading
 presets.json              ← Preset definitions (campaign copy & Salesforce hidden field values)
 
 templates/
   transparent.css         ← ?template=transparent
   dark.css                ← ?template=dark
   light.css               ← ?template=light
+
+configs/
+  poolorg14.json          ← BarthHaas poolorg14 sandbox (matches hardcoded defaults)
+  uat.json                ← BarthHaas UAT sandbox
+  poolorg1.json           ← BarthHaas poolorg1 sandbox (partial field mapping)
 
 parent.html               ← Reference/test page: full-page layout with parallax + embedded iframe
 ```
@@ -265,13 +295,46 @@ Valid `lead_source` values: `YVH`, `Webshop`, `Website signups`, `Marketing`, `C
 
 ---
 
-## Production vs Sandbox
+## Org environments
 
-The form currently posts to the **Salesforce sandbox** endpoint. To switch to production, change only the `action` URL in `LeadForm/index.html`:
+### How org switching works
 
-| Environment | Action URL |
+The HTML files have field IDs and action URLs **hardcoded** as their default. When `?org=` is present, `forms.js` fetches `configs/{org}.json` and patches the DOM before the form renders — replacing the `name`/`id` attributes on custom fields, the hidden org ID, and the form `action` URL.
+
+If `?org=` is absent, nothing is patched and the hardcoded defaults are used.
+
+### Current default (no `?org=` param)
+
+The hardcoded defaults in the HTML currently point to **poolorg14** (development sandbox):
+
+| Field | Value |
 |---|---|
-| Sandbox | `https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D9M00000Ki5V8` |
-| Production | `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D9M00000Ki5V8` |
+| Org ID | `00D9M00000Ki5V8` |
+| Lead action | `https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D9M00000Ki5V8` |
+| Case action | `https://barthhaas--poolorg14.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D9M00000Ki5V8` |
 
-No other changes are needed — field IDs and the org ID are identical across both environments.
+### Adding a new org config
+
+1. Copy `configs/poolorg14.json` as a starting point.
+2. Fill in the `oid`, `action_lead`, `action_case`, and all `fields` values for the new org.
+3. Save as `configs/{name}.json`.
+4. Access via `?org={name}` — no code changes needed.
+
+### Switching to production
+
+When production IDs are available, two options:
+
+**Option A — Replace the hardcoded defaults** (cleanest for production deploy):
+Update the `name`/`id` attributes and action URL directly in `LeadForm/index.html` and `CaseForm/index.html`. No `?org=` param needed in production.
+
+**Option B — Add a `configs/prod.json`** (zero HTML changes):
+Create the config file with production IDs and always link to forms with `?org=prod`.
+
+### WebToLead endpoint: sandbox vs production
+
+| Environment | Lead action URL |
+|---|---|
+| Any sandbox | `https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId={oid}` |
+| Production | `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId={oid}` |
+
+The WebToCase endpoint is org-specific (My Domain URL) and differs per sandbox — see `configs/*.json` for each org's value.

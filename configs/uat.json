@@ -1,0 +1,14 @@
+{
+  "oid": "00DFg00000CpaYn",
+  "action_lead": "https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DFg00000CpaYn",
+  "action_case": "https://barthhaas--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DFg00000CpaYn",
+  "fields": {
+    "campaign_field":          "00NFg00000WMCbD",
+    "customer_tier":           "00N2p000009T9yk",
+    "position":                "00N2p0000096ZVY",
+    "lead_source_detail":      "00N2p0000097UMz",
+    "data_consent_lead":       "",
+    "newsletter_consent_lead": "00NFg00000WMCbE",
+    "newsletter_consent_case": "00NFg00000WMCbB"
+  }
+}

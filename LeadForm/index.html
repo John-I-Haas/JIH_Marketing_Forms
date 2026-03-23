@@ -21,7 +21,7 @@
       <input type="hidden" name="retURL" value="https://jih-marketing-forms.vercel.app/thankyou.html">
       <!--<input type="hidden" name="Campaign_ID" value="7019M00001TBlpMQAT">-->
       <!-- JIH_Campaign__c -->
-      <input type="hidden" id="00N9M00000XtQID" maxlength="255" name="00N9M00000XtQID" size="20" type="text" />
+      <input type="hidden" id="00N9M00000XtQID" maxlength="255" name="00N9M00000XtQID" size="20" type="text" data-field="campaign_field" />
 
       <!--  Debug fields (uncomment to test) -->
       <input type="hidden" name="debug" value="1">
@@ -54,7 +54,7 @@
         <li>
           <label for="00N2p000009T9yk">Customer tier</label>
           <div class="select-wrapper">
-            <select id="00N2p000009T9yk" name="00N2p000009T9yk" title="Customer tier">
+            <select id="00N2p000009T9yk" name="00N2p000009T9yk" title="Customer tier" data-field="customer_tier">
               <option value="">Less than 1,000 Barrels</option>
               <option value="TIER 1">1,000 - 5,000 Barrels</option>
               <option value="TIER 2">5,000 - 30,000 Barrels</option>
@@ -89,7 +89,7 @@
         <li>
           <label for="00N2p0000096ZVY">Position</label>
           <div class="select-wrapper">
-            <select id="00N2p0000096ZVY" name="00N2p0000096ZVY" title="Position">
+            <select id="00N2p0000096ZVY" name="00N2p0000096ZVY" title="Position" data-field="position">
               <option value="">Position</option>
               <option value="Brewing">Brewer / Head Brewer / Brewmaster</option>
               <option value="Purchasing">Purchasing / Supply Chain</option>
@@ -129,14 +129,14 @@
 
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
-            <input type="checkbox" id="data-consent" name="00N9M00000Xl7Pd" value="1" required>
+            <input type="checkbox" id="data-consent" name="00N9M00000Xl7Pd" value="1" required data-field="data_consent_lead">
             <label for="data-consent" class="checkbox-label">I have read and agree to the John I. Haas <a href="https://www.johnihaas.com/privacy-policy/" target="_blank">Privacy Policy</a>. *</label>
           </div>
         </li>
 
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
-            <input type="checkbox" id="newsletter-consent" name="00N9M00000Xl7EL" value="1">
+            <input type="checkbox" id="newsletter-consent" name="00N9M00000Xl7EL" value="1" data-field="newsletter_consent_lead">
             <label for="newsletter-consent" class="checkbox-label">Yes, I want to receive marketing emails from John I. Haas, including newsletters, product updates, and other important information. I understand that I can revoke this consent at any time.</label>
           </div>
         </li>
@@ -146,7 +146,7 @@
       <!-- Hidden fields populated by JS — valid lead_source values: JIH Marketing Forms, YVH, Webshop, Website signups, Marketing, Customer portal, CBC Attendee -->
       <input type="hidden" id="lead_source" name="lead_source" value="JIH Marketing Forms">
       <!-- Lead Source Detail: free-text companion to lead_source, set by JS -->
-      <input type="hidden" id="00N2p0000097UMz" name="00N2p0000097UMz" value="">
+      <input type="hidden" id="00N2p0000097UMz" name="00N2p0000097UMz" value="" data-field="lead_source_detail">
 
       <div class="form-submit">
         <input type="submit" name="submit" value="Let's Talk Hops">

@@ -1,3 +1,53 @@
+// Org config — patches form action, oid, and custom field name/id attributes at runtime
+// Usage: add ?org=poolorg14 (or any name matching a file in configs/) to the URL
+(function () {
+  var org = new URLSearchParams(location.search).get('org');
+  if (!org) return;
+
+  var scriptSrc = document.currentScript ? document.currentScript.src : '';
+  var configBase = scriptSrc
+    ? scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1) + 'configs/'
+    : '../configs/';
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fetch(configBase + org + '.json')
+      .then(function (res) { return res.json(); })
+      .then(function (cfg) {
+        var form = document.querySelector('form');
+
+        // Patch form action URL
+        if (form) {
+          if (cfg.action_lead && document.querySelector('[name="oid"]')) {
+            form.action = cfg.action_lead;
+          } else if (cfg.action_case && document.querySelector('[name="orgid"]')) {
+            form.action = cfg.action_case;
+          }
+        }
+
+        // Patch oid / orgid hidden inputs
+        if (cfg.oid) {
+          var oid = document.querySelector('[name="oid"]');
+          if (oid) oid.value = cfg.oid;
+          var orgid = document.querySelector('[name="orgid"]');
+          if (orgid) orgid.value = cfg.oid;
+        }
+
+        // Patch custom-ID fields via data-field attributes
+        if (cfg.fields) {
+          Object.keys(cfg.fields).forEach(function (key) {
+            var newName = cfg.fields[key];
+            if (!newName) return;
+            var el = document.querySelector('[data-field="' + key + '"]');
+            if (!el) return;
+            el.name = newName;
+            el.id = newName;
+          });
+        }
+      })
+      .catch(function () {}); // silently ignore — form falls back to hardcoded defaults
+  });
+})();
+
 // Template CSS injection — runs immediately when script is parsed in <head>
 (function () {
   var template = new URLSearchParams(location.search).get('template');

@@ -1,0 +1,14 @@
+{
+  "oid": "00DFg00000KfxiD",
+  "action_lead": "https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DFg00000KfxiD",
+  "action_case": "",
+  "fields": {
+    "campaign_field":          "00NFg00000WAMuU",
+    "customer_tier":           "",
+    "position":                "",
+    "lead_source_detail":      "",
+    "data_consent_lead":       "",
+    "newsletter_consent_lead": "00NFg00000WAMuV",
+    "newsletter_consent_case": ""
+  }
+}
