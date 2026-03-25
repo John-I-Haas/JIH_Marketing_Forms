@@ -58,6 +58,15 @@
   link.rel = 'stylesheet';
   link.href = base + 'templates/' + template + '.css';
   document.head.appendChild(link);
+
+  // Append template param to retURL so the thank-you page uses the same theme
+  document.addEventListener('DOMContentLoaded', function () {
+    var retInput = document.querySelector('[name="retURL"]');
+    if (retInput && retInput.value) {
+      var sep = retInput.value.indexOf('?') >= 0 ? '&' : '?';
+      retInput.value = retInput.value + sep + 'template=' + encodeURIComponent(template);
+    }
+  });
 })();
 
 (function () {

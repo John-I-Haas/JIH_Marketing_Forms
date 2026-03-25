@@ -9,3 +9,6 @@ html, body {
 .checkbox-label            { color: rgba(255,255,255,0.9) !important; }
 .checkbox-label a          { color: #c8e6a0; }
 .checkbox-label a:hover    { color: #fff; }
+
+.thankyou-wrapper h1       { color: #fff; }
+.thankyou-wrapper p        { color: rgba(255,255,255,0.85); }
