@@ -57,5 +57,18 @@
   "hop-aid": {
     "subject": "Hop Aid Inquiry",
     "description": "I am interested in learning more about Hop Aid. Please send me more information or have a representative reach out."
+  },
+
+  "_companies": {
+    "jih": {
+      "legend": "I have read and agree to the John I. Haas ",
+      "link_text": "Privacy Policy",
+      "link_url": "https://www.johnihaas.com/privacy-policy/"
+    },
+    "betatech": {
+      "legend": "I have read and agree to the BetaTech ",
+      "link_text": "Privacy Policy BETATECH",
+      "link_url": "https://betatec.com/privacy/"
+    }
   }
 }

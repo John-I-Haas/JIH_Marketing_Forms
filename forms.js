@@ -125,3 +125,41 @@
       .catch(function () {}); // silently ignore if presets.json unavailable
   });
 })();
+
+// Company config — patches privacy policy checkbox label at runtime
+// Usage: add ?company=betatech (or any key defined under "_companies" in presets.json)
+(function () {
+  var company = new URLSearchParams(location.search).get('company') || 'jih';
+
+  var scriptSrc = document.currentScript ? document.currentScript.src : '';
+  var presetsURL = scriptSrc
+    ? scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1) + 'presets.json'
+    : '../presets.json';
+
+  document.addEventListener('DOMContentLoaded', function () {
+    fetch(presetsURL)
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var companies = data['_companies'];
+        if (!companies) return;
+        var cfg = companies[company];
+        if (!cfg) return;
+
+        // Find privacy checkbox label: first .checkbox-label that contains an <a>
+        var privacyLabel = null;
+        var labels = document.querySelectorAll('.checkbox-label');
+        for (var i = 0; i < labels.length; i++) {
+          if (labels[i].querySelector('a')) { privacyLabel = labels[i]; break; }
+        }
+        if (!privacyLabel) return;
+
+        var legend   = cfg.legend    || '';
+        var linkText = cfg.link_text || 'Privacy Policy';
+        var linkUrl  = cfg.link_url  || '#';
+        privacyLabel.innerHTML =
+          legend +
+          '<a href="' + linkUrl + '" target="_blank">' + linkText + '</a>. *';
+      })
+      .catch(function () {});
+  });
+})();

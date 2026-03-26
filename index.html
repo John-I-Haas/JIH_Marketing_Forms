@@ -213,6 +213,14 @@
       <label for="tpl-light" class="tpl-btn">Light</label>
     </div>
 
+    <div class="template-picker">
+      <label>Company:</label>
+      <input type="radio" name="co" id="co-jih" value="jih" checked>
+      <label for="co-jih" class="tpl-btn">John I. Haas</label>
+      <input type="radio" name="co" id="co-betatech" value="betatech">
+      <label for="co-betatech" class="tpl-btn">BetaTech</label>
+    </div>
+
     <div class="selector-buttons" style="margin-top: 0;">
       <a href="LeadForm/CBCForm.html">CBC Form</a>
     </div>
@@ -229,22 +237,26 @@ v2.0
       a.dataset.baseHref = a.href;
     });
 
-    function updateLinks(template) {
+    function updateLinks() {
+      var template = document.querySelector('input[name="tpl"]:checked').value;
+      var company  = document.querySelector('input[name="co"]:checked').value;
+
       document.querySelectorAll('a[data-base-href]').forEach(function (a) {
         var url = new URL(a.dataset.baseHref);
-        if (template) {
-          url.searchParams.set('template', template);
-        } else {
-          url.searchParams.delete('template');
-        }
+
+        if (template) { url.searchParams.set('template', template); }
+        else           { url.searchParams.delete('template'); }
+
+        // jih is default — omit param so URLs stay clean
+        if (company && company !== 'jih') { url.searchParams.set('company', company); }
+        else                              { url.searchParams.delete('company'); }
+
         a.href = url.toString();
       });
     }
 
-    document.querySelectorAll('input[name="tpl"]').forEach(function (radio) {
-      radio.addEventListener('change', function () {
-        updateLinks(this.value);
-      });
+    document.querySelectorAll('input[name="tpl"], input[name="co"]').forEach(function (radio) {
+      radio.addEventListener('change', updateLinks);
     });
   </script>
 </body>
