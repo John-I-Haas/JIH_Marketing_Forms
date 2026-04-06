@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - John I. Haas</title>
+  <title>Contact Us - BetaTec</title>
   <link rel="stylesheet" href="../forms.css">
 </head>
 
 <body>
 
-  This is a test of the html to be embedded in the BetaTech website. The form submits to Salesforce and creates a Lead.
+  This is a test of the html to be embedded in the BetaTec website. The form submits to Salesforce and creates a Lead.
 
   <div class="form-wrapper">
 
@@ -18,13 +17,9 @@
       method="POST">
 
       <input type="hidden" name="oid" value="00D9M00000Ki5V8">
-      <!-- retURL must be an absolute URL when deployed — update to match the hosted domain -->
+      <!-- retUR: Where will the user be redirected after submission -->
       <input type="hidden" name="retURL" value="https://jih-marketing-forms.vercel.app/thankyou.html">
-      <!--<input type="hidden" name="Campaign_ID" value="7019M00001TBlpMQAT">-->
-      <!-- JIH_Campaign__c 
-      <input type="hidden" id="00N9M00000XtQID" maxlength="255" name="00N9M00000XtQID" size="20" type="text" data-field="campaign_field" />
-      -->
-      <!--  Debug fields (uncomment to test) 
+      <!--  Debug fields (uncomment to test, you will get an email if a submission failed.) 
       <input type="hidden" name="debug" value="1">
       <input type="hidden" name="debugEmail" value="ruben.cervantes@johnihaas.com">
       -->
@@ -78,8 +73,25 @@
         <label for="country">Country (text only)</label><input  id="country" maxlength="40" name="country" size="20" type="text" /><br>
         <label for="state">State/Province (text only)</label>
         <input  id="state" maxlength="20" name="state" size="20" type="text" />
-        
         -->
+
+        <li>
+          <label for="00N2p0000096ZVY">Position</label>
+          <div class="select-wrapper">
+            <select id="00N2p0000096ZVY" name="00N2p0000096ZVY" title="Position" data-field="position">
+              <option value="">Position</option>
+              <option value="Purchasing">Purchasing</option>
+              <option value="Lab">Lab</option>
+              <option value="Sales">Sales</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Plant Manager">Plant Manager</option>
+              <option value="Production">Production</option>
+              <option value="R&amp;D">R&D</option>
+              <option value="Finance">Finance</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </li>
 
         <li>
           <label for="state">State/Province</label>
@@ -118,24 +130,20 @@
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
             <input type="checkbox" id="data-consent" name="00N9M00000Xl7Pd" value="1" required data-field="data_consent_lead">
-            <label for="data-consent" class="checkbox-label">I have read and agree to the BetaTech <a href="https://betatec.com/privacy" target="_blank">Privacy Policy</a>. *</label>
+            <label for="data-consent" class="checkbox-label">I have read and agree to the BetaTec <a href="https://betatec.com/privacy" target="_blank">Privacy Policy</a>. *</label>
           </div>
         </li>
 
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
             <input type="checkbox" id="newsletter-consent" name="00N9M00000Xl7EL" value="1" data-field="newsletter_consent_lead">
-            <label for="newsletter-consent" class="checkbox-label">Yes, I want to receive marketing emails from BetaTech, including newsletters, product updates, and other important information. I understand that I can revoke this consent at any time.</label>
+            <label for="newsletter-consent" class="checkbox-label">Yes, I want to receive marketing emails from BetaTec, including newsletters, product updates, and other important information. I understand that I can revoke this consent at any time.</label>
           </div>
         </li>
 
       </ul>
 
-      <!-- Hidden fields populated by JS — valid lead_source values: JIH Marketing Forms, YVH, Webshop, Website signups, Marketing, Customer portal, CBC Attendee -->
       <input type="hidden" id="lead_source" name="lead_source" value="Website BHP">
-      <!-- Lead Source Detail: free-text companion to lead_source, set by JS 
-      <input type="hidden" id="00N2p0000097UMz" name="00N2p0000097UMz" value="" data-field="lead_source_detail">
-      -->
 
       <div class="form-submit">
         <input type="submit" name="submit" value="Let's Talk Hops">
