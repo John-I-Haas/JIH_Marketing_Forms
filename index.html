@@ -248,8 +248,8 @@ v2.0
         else           { url.searchParams.delete('template'); }
 
         // jih is default — omit param so URLs stay clean
-        if (company && company !== 'jih') { url.searchParams.set('company', company); }
-        else                              { url.searchParams.delete('company'); }
+        if (company && company !== 'jih') { url.searchParams.set('branch', company); }
+        else                              { url.searchParams.delete('branch'); }
 
         a.href = url.toString();
       });

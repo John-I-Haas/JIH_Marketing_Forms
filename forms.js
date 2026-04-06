@@ -126,10 +126,10 @@
   });
 })();
 
-// Company config — patches privacy policy checkbox label at runtime
-// Usage: add ?company=betatech (or any key defined under "_companies" in presets.json)
+// Branch config — patches privacy policy checkbox label at runtime
+// Usage: add ?branch=betatech (or any key defined under "_branches" in presets.json)
 (function () {
-  var company = new URLSearchParams(location.search).get('company') || 'jih';
+  var company = new URLSearchParams(location.search).get('branch') || 'jih';
 
   var scriptSrc = document.currentScript ? document.currentScript.src : '';
   var presetsURL = scriptSrc
@@ -140,7 +140,7 @@
     fetch(presetsURL)
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        var companies = data['_companies'];
+        var companies = data['_branches'];
         if (!companies) return;
         var cfg = companies[company];
         if (!cfg) return;
