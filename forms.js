@@ -36,9 +36,12 @@
         if (cfg.fields) {
           Object.keys(cfg.fields).forEach(function (key) {
             var newName = cfg.fields[key];
-            if (!newName) return;
             var el = document.querySelector('[data-field="' + key + '"]');
             if (!el) return;
+            if (!newName) {
+              el.removeAttribute('name'); // gate-only: strip name so nothing is sent to SF
+              return;
+            }
             el.name = newName;
             el.id = newName;
           });

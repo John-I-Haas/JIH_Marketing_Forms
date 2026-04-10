@@ -104,15 +104,25 @@ Config files live in `configs/{org}.json`. Available values:
 
 | Value | Org | Notes |
 |---|---|---|
-| *(none)* | **poolorg14** (hardcoded default) | Current development sandbox — IDs are baked into the HTML |
+| *(none)* | **poolorg14** (hardcoded default) | Development sandbox — IDs are baked into the HTML |
+| `prod` | Production org (`00D2p0000012FXy`) | **Use for go-live** |
 | `poolorg14` | BarthHaas poolorg14 sandbox | Same as the hardcoded defaults |
 | `uat` | BarthHaas UAT (`barthhaas--uat`) | UAT sandbox |
 | `poolorg1` | BarthHaas poolorg1 sandbox | Partial field mapping |
 
-> **Production note:** The hardcoded defaults in the HTML currently point to **poolorg14** (development). When production IDs are available, either update the HTML directly or add a `configs/prod.json` and use `?org=prod`.
+> **Go-live note:** To make production the default (no `?org=` needed), change one line in `forms.js`:
+> ```js
+> // Current (default = poolorg14 hardcoded)
+> var org = new URLSearchParams(location.search).get('org');
+> if (!org) return;
+>
+> // After go-live (default = prod)
+> var org = new URLSearchParams(location.search).get('org') || 'prod';
+> ```
 
 **Example:**
 ```
+https://jih-marketing-forms.vercel.app/LeadForm/index.html?org=prod
 https://jih-marketing-forms.vercel.app/LeadForm/index.html?org=uat
 ```
 
@@ -260,6 +270,7 @@ templates/
   light.css               ← ?template=light
 
 configs/
+  prod.json               ← Production org (00D2p0000012FXy)
   poolorg14.json          ← BarthHaas poolorg14 sandbox (matches hardcoded defaults)
   uat.json                ← BarthHaas UAT sandbox
   poolorg1.json           ← BarthHaas poolorg1 sandbox (partial field mapping)
@@ -313,22 +324,14 @@ The hardcoded defaults in the HTML currently point to **poolorg14** (development
 | Lead action | `https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D9M00000Ki5V8` |
 | Case action | `https://barthhaas--poolorg14.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D9M00000Ki5V8` |
 
+To make production the default after go-live, see the `?org=` section above.
+
 ### Adding a new org config
 
 1. Copy `configs/poolorg14.json` as a starting point.
 2. Fill in the `oid`, `action_lead`, `action_case`, and all `fields` values for the new org.
 3. Save as `configs/{name}.json`.
 4. Access via `?org={name}` — no code changes needed.
-
-### Switching to production
-
-When production IDs are available, two options:
-
-**Option A — Replace the hardcoded defaults** (cleanest for production deploy):
-Update the `name`/`id` attributes and action URL directly in `LeadForm/index.html` and `CaseForm/index.html`. No `?org=` param needed in production.
-
-**Option B — Add a `configs/prod.json`** (zero HTML changes):
-Create the config file with production IDs and always link to forms with `?org=prod`.
 
 ### WebToLead endpoint: sandbox vs production
 
@@ -337,4 +340,97 @@ Create the config file with production IDs and always link to forms with `?org=p
 | Any sandbox | `https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId={oid}` |
 | Production | `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId={oid}` |
 
-The WebToCase endpoint is org-specific (My Domain URL) and differs per sandbox — see `configs/*.json` for each org's value.
+The WebToCase endpoint uses the org's My Domain URL and differs per environment — see `configs/*.json`.
+
+---
+
+## Salesforce Field Reference
+
+### Standard fields (all orgs)
+
+Built-in Salesforce fields — no custom ID needed, same `name` attribute everywhere.
+
+**Lead object**
+
+| Label | `name` attribute |
+|---|---|
+| First Name | `first_name` |
+| Last Name | `last_name` |
+| Email | `email` |
+| Company | `company` |
+| Phone | `phone` |
+| Country Code | `country_code` |
+| State/Province | `state` |
+| Industry | `industry` |
+| Lead Source | `lead_source` |
+| Description | `description` |
+
+Valid `lead_source` values (prod): `JIH Marketing Forms`, `YVH`, `Webshop`, `Website signups`, `Marketing`, `Customer portal`, `CBC Attendee`.
+
+**Case object**
+
+| Label | `name` attribute |
+|---|---|
+| Contact Name | `name` |
+| Email | `email` |
+| Phone | `phone` |
+| Subject | `subject` |
+| Description | `description` |
+| Case Reason | `reason` |
+
+---
+
+### Custom fields — by org
+
+These IDs (`00N…`) are org-specific and stored in `configs/<org>.json`. The `data-field` key is how `forms.js` identifies which element to patch at runtime.
+
+When a field value is empty (`""`) in the config, `forms.js` **removes the `name` attribute** from that element — it renders and still blocks submission if `required`, but nothing is sent to Salesforce.
+
+#### Production — `configs/prod.json` — Org `00D2p0000012FXy`
+
+| Label | `data-field` key | Salesforce ID | Object |
+|---|---|---|---|
+| JIH Campaign | `campaign_field` | `00NVi00000F3KbC` | Lead |
+| Customer Tier | `customer_tier` | `00N2p000009T9yk` | Lead |
+| Position | `position` | `00N2p0000096ZVY` | Lead |
+| Lead Source Detail | `lead_source_detail` | `00N2p0000097UMz` | Lead |
+| Data Consent | `data_consent_lead` | _(not used — gate only)_ | Lead |
+| Newsletter Consent | `newsletter_consent_lead` | `00NVi00000F3KbD` | Lead |
+| Newsletter Consent | `newsletter_consent_case` | `00NVi00000F3KbA` | Case |
+
+#### poolorg14 sandbox — `configs/poolorg14.json` — Org `00D9M00000Ki5V8`
+
+| Label | `data-field` key | Salesforce ID | Object |
+|---|---|---|---|
+| JIH Campaign | `campaign_field` | `00N9M00000XtQID` | Lead |
+| Customer Tier | `customer_tier` | `00N2p000009T9yk` | Lead |
+| Position | `position` | `00N2p0000096ZVY` | Lead |
+| Lead Source Detail | `lead_source_detail` | `00N2p0000097UMz` | Lead |
+| Data Consent | `data_consent_lead` | `00N9M00000Xl7Pd` | Lead |
+| Newsletter Consent | `newsletter_consent_lead` | `00N9M00000Xl7EL` | Lead |
+| Newsletter Consent | `newsletter_consent_case` | `00N9M00000XlFv3` | Case |
+
+#### UAT sandbox — `configs/uat.json` — Org `00DFg00000CpaYn`
+
+| Label | `data-field` key | Salesforce ID | Object |
+|---|---|---|---|
+| JIH Campaign | `campaign_field` | `00NFg00000WMCbD` | Lead |
+| Customer Tier | `customer_tier` | `00N2p000009T9yk` | Lead |
+| Position | `position` | `00N2p0000096ZVY` | Lead |
+| Lead Source Detail | `lead_source_detail` | `00N2p0000097UMz` | Lead |
+| Data Consent | `data_consent_lead` | _(not used)_ | Lead |
+| Newsletter Consent | `newsletter_consent_lead` | `00NFg00000WMCbE` | Lead |
+| Newsletter Consent | `newsletter_consent_case` | `00NFg00000WMCbB` | Case |
+
+---
+
+## Pre-Go-Live Checklist
+
+- [ ] Verify all `configs/prod.json` field IDs in Salesforce Setup → Object Manager → Lead → Fields & Relationships
+- [ ] Test `?org=prod` on LeadForm — confirm Lead is created in prod with correct field values
+- [ ] Test `?org=prod` on CaseForm — confirm Case is created in prod
+- [ ] Confirm data consent checkbox: must block submission when unchecked; must NOT appear in POST payload for prod (no `name` attribute)
+- [ ] Replace shortened country list in HTML with the full country list
+- [ ] Update `retURL` in all HTML files to the final hosted domain
+- [ ] Remove or comment out `debug` / `debugEmail` hidden fields in all HTML files
+- [ ] Flip default org to prod in `forms.js` (one-line change — see `?org=` section)
