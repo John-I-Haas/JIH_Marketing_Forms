@@ -1,16 +1,18 @@
 // Org config — patches form action, oid, and custom field name/id attributes at runtime
-// Usage: add ?org=poolorg14 (or any name matching a file in configs/) to the URL
+// Usage: add ?org=<name> (matches a file in configs/) to force a specific org.
+// Default org is controlled by _config in presets.json:
+//   { "sandbox": true,  "sandbox_default": "poolorg14" }  → default = poolorg14
+//   { "sandbox": false, "sandbox_default": "poolorg14" }  → default = prod
 (function () {
   var org = new URLSearchParams(location.search).get('org');
-  if (!org) return;
 
   var scriptSrc = document.currentScript ? document.currentScript.src : '';
-  var configBase = scriptSrc
-    ? scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1) + 'configs/'
-    : '../configs/';
+  var base = scriptSrc ? scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1) : '../';
+  var configBase = base + 'configs/';
+  var presetsURL = base + 'presets.json';
 
-  document.addEventListener('DOMContentLoaded', function () {
-    fetch(configBase + org + '.json')
+  function applyOrgConfig(orgName) {
+    fetch(configBase + orgName + '.json')
       .then(function (res) { return res.json(); })
       .then(function (cfg) {
         var form = document.querySelector('form');
@@ -48,6 +50,22 @@
         }
       })
       .catch(function () {}); // silently ignore — form falls back to hardcoded defaults
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    if (org) {
+      applyOrgConfig(org);
+    } else {
+      // No ?org= param — resolve default from presets.json _config
+      fetch(presetsURL)
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          var envCfg = data['_config'] || {};
+          var defaultOrg = (envCfg.sandbox === false) ? 'prod' : (envCfg.sandbox_default || 'poolorg14');
+          applyOrgConfig(defaultOrg);
+        })
+        .catch(function () {}); // silently ignore — form falls back to hardcoded defaults
+    }
   });
 })();
 

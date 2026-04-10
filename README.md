@@ -110,14 +110,10 @@ Config files live in `configs/{org}.json`. Available values:
 | `uat` | BarthHaas UAT (`barthhaas--uat`) | UAT sandbox |
 | `poolorg1` | BarthHaas poolorg1 sandbox | Partial field mapping |
 
-> **Go-live note:** To make production the default (no `?org=` needed), change one line in `forms.js`:
-> ```js
-> // Current (default = poolorg14 hardcoded)
-> var org = new URLSearchParams(location.search).get('org');
-> if (!org) return;
->
-> // After go-live (default = prod)
-> var org = new URLSearchParams(location.search).get('org') || 'prod';
+> **Go-live:** The default org is controlled by `_config` in `presets.json` — no code change needed:
+> ```json
+> "_config": { "sandbox": true,  "sandbox_default": "poolorg14" }  // → default = poolorg14
+> "_config": { "sandbox": false, "sandbox_default": "poolorg14" }  // → default = prod
 > ```
 
 **Example:**
@@ -324,7 +320,7 @@ The hardcoded defaults in the HTML currently point to **poolorg14** (development
 | Lead action | `https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D9M00000Ki5V8` |
 | Case action | `https://barthhaas--poolorg14.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D9M00000Ki5V8` |
 
-To make production the default after go-live, see the `?org=` section above.
+To make production the default at go-live, set `"sandbox": false` in `presets.json` — see the `?org=` section above.
 
 ### Adding a new org config
 
@@ -433,4 +429,4 @@ When a field value is empty (`""`) in the config, `forms.js` **removes the `name
 - [ ] Replace shortened country list in HTML with the full country list
 - [ ] Update `retURL` in all HTML files to the final hosted domain
 - [ ] Remove or comment out `debug` / `debugEmail` hidden fields in all HTML files
-- [ ] Flip default org to prod in `forms.js` (one-line change — see `?org=` section)
+- [ ] Flip `"sandbox": false` in `presets.json` `_config` to route all unparameterised traffic to prod

@@ -1,4 +1,9 @@
 {
+  "_config": {
+    "sandbox": true,
+    "sandbox_default": "poolorg14"
+  },
+
   "how-to-buy": {
     "subject": "Interested in Purchasing Hops",
     "description": "I am interested in learning more about the full range of John I. Haas products. Please send me more information or have a representative reach out."
