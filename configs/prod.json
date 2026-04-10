@@ -1,0 +1,14 @@
+{
+  "oid": "00D2p0000012FXy",
+  "action_lead": "https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D2p0000012FXy",
+  "action_case": "https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D2p0000012FXy",
+  "fields": {
+    "campaign_field":          "00NVi00000F3KbC",
+    "customer_tier":           "00N2p000009T9yk",
+    "position":                "00N2p0000096ZVY",
+    "lead_source_detail":      "00N2p0000097UMz",
+    "data_consent_lead":       "",
+    "newsletter_consent_lead": "00NVi00000F3KbD",
+    "newsletter_consent_case": "00NVi00000F3KbA"
+  }
+}
