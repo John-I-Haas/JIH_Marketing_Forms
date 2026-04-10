@@ -1,0 +1,118 @@
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
+<!--  If necessary, please modify the charset parameter to specify the        -->
+<!--  character set of your HTML page.                                        -->
+<!--  ----------------------------------------------------------------------  -->
+
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: Please add the following <FORM> element to your page.             -->
+<!--  ----------------------------------------------------------------------  -->
+
+<form action="https://barthhaas--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DFg00000CpaYn" method="POST">
+
+<input type=hidden name="orgid" value="00DFg00000CpaYn">
+<input type=hidden name="retURL" value="http://s">
+
+<!--  ----------------------------------------------------------------------  -->
+<!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+<!--  these lines if you wish to test in debug mode.                          -->
+<!--  <input type="hidden" name="debug" value=1>                              -->
+<!--  <input type="hidden" name="debugEmail"                                  -->
+<!--  value="ruben.cervantes@johnihaas.com">                                  -->
+<!--  ----------------------------------------------------------------------  -->
+
+<label for="name">Contact Name</label><input  id="name" maxlength="80" name="name" size="20" type="text" /><br>
+
+<label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
+
+<label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
+
+<label for="subject">Subject</label><input  id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
+
+<label for="description">Description</label><textarea name="description"></textarea><br>
+
+<label for="company">Company</label><input  id="company" maxlength="80" name="company" size="20" type="text" /><br>
+
+<label for="reason">Case Reason</label><select  id="reason" name="reason"><option value="">--None--</option><option value="User didn&#39;t attend training">User didn&#39;t attend training</option>
+<option value="Complex functionality">Complex functionality</option>
+<option value="Existing problem">Existing problem</option>
+<option value="Instructions not clear">Instructions not clear</option>
+<option value="New problem">New problem</option>
+<option value="Alphaabweichung">Alphaabweichung</option>
+<option value="Liefertermin nicht eingehalten">Liefertermin nicht eingehalten</option>
+</select><br>
+
+<label for="priority">Priority</label><select  id="priority" name="priority"><option value="">--None--</option><option value="High">High</option>
+<option value="Medium">Medium</option>
+<option value="Low">Low</option>
+</select><br>
+
+<label for="recordType">Case Record Type</label><select  id="recordType" name="recordType"><option value="">--None--</option><option value="0122p000000OVhH">Beratung</option>
+<option value="0122p000000OVhJ">Besuchsanfrage</option>
+<option value="0122p000000OVqh">Besuchsanfrage Verkauf</option>
+<option value="0122p000000Vkzo">BHX Case</option>
+<option value="0122p000000Vkzp">BHX Registration Layout</option>
+<option value="0122p000000OVhK">Brauversuch</option>
+<option value="0122p000000OVhL">Generelle Anfrage</option>
+<option value="012Vi0000017hXb">JIH</option>
+<option value="012Vi0000001aKn">QM</option>
+<option value="0122p000000OVhN">Reklamationen</option>
+<option value="0122p000000OVhM">Reklamation Partie</option>
+<option value="0122p000000OVhO">Schadensmeldung</option>
+<option value="0122p000000OVhP">Technische Anfrage</option>
+<option value="0122p000000OVqj">Technische Anfrage Verkauf</option>
+<option value="0122p000000OWuV">Vertragsänderung</option>
+</select><br>
+
+Description:<textarea  id="00N2p0000095tCa" name="00N2p0000095tCa" rows="5" type="text" wrap="soft"></textarea><br>
+
+Type of complaint:<select  id="00N2p0000095tCm" name="00N2p0000095tCm" title="Type of complaint"><option value="">--None--</option><option value="Alpha/Ausbeute Problem / Alpha/processing yield">Alpha/Ausbeute Problem / Alpha/processing yield</option>
+<option value="Produktqualität / Product quality">Produktqualität / Product quality</option>
+<option value="Verpackung / Packaging">Verpackung / Packaging</option>
+<option value="Liefertermine / Delivery date">Liefertermine / Delivery date</option>
+<option value="Transportprobleme / Transport">Transportprobleme / Transport</option>
+<option value="Sonstige / Others">Sonstige / Others</option>
+<option value="Contract Amendment">Contract Amendment</option>
+<option value="Fremdmaterial/Foreign material">Fremdmaterial/Foreign material</option>
+<option value="Pflanzenschutz">Pflanzenschutz</option>
+<option value="PSM">PSM</option>
+<option value="SCHMUTZ">SCHMUTZ</option>
+<option value="SONSTIGE">SONSTIGE</option>
+<option value="AUFTEILUNG">AUFTEILUNG</option>
+<option value="SORTE">SORTE</option>
+<option value="VERLADUNG">VERLADUNG</option>
+<option value="BEF">BEF</option>
+<option value="ABWAAGE">ABWAAGE</option>
+<option value="DB">DB</option>
+<option value="BSA">BSA</option>
+<option value="PRESSUNG">PRESSUNG</option>
+<option value="H2O">H2O</option>
+<option value="interne Reklamation">interne Reklamation</option>
+<option value="Lagerung / storage">Lagerung / storage</option>
+</select><br>
+
+Newsletter Consent:<input  id="00NFg00000WMCbB" name="00NFg00000WMCbB" type="checkbox" value="1" /><br>
+
+Contact Reason:<select  id="00NVi000005j4ml" name="00NVi000005j4ml" title="Contact Reason"><option value="">--None--</option><option value="Buy Hops">Buy Hops</option>
+<option value="Request Modification / Inventory Exchange">Request Modification / Inventory Exchange</option>
+<option value="Sales Call">Sales Call</option>
+<option value="Technical Support">Technical Support</option>
+<option value="Complaint">Complaint</option>
+<option value="Product Inquiries/Return">Product Inquiries/Return</option>
+<option value="Marketing or press inquiry">Marketing or press inquiry</option>
+<option value="Sponsoring">Sponsoring</option>
+<option value="Charity">Charity</option>
+<option value="Human Resources inquiry">Human Resources inquiry</option>
+<option value="Employment">Employment</option>
+<option value="Finance Inquiry">Finance Inquiry</option>
+<option value="Collaboration">Collaboration</option>
+<option value="Other">Other</option>
+</select><br>
+
+<input type="hidden"  id="external" name="external" value="1" /><br>
+
+<input type="submit" name="submit">
+
+</form>
