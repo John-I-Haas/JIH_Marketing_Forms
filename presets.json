@@ -1,70 +1,82 @@
 {
   "_config": {
     "sandbox": true,
-    "sandbox_default": "poolorg14"
+    "sandbox_default": "uat"
   },
 
   "how-to-buy": {
     "subject": "Interested in Purchasing Hops",
+    "campaign_name": "JIH_landingpage_Howtobuy",
     "description": "I am interested in learning more about the full range of John I. Haas products. Please send me more information or have a representative reach out."
   },
   "harvest": {
     "subject": "Hop Harvest Inquiry",
-    "description": "I am interested in information about the upcoming hop harvest, including selection options, availability and timing. Please send me more information or have a representative reach out.",
-    "campaign_name": "Incognito 2026"
+    "campaign_name": "JIH_landingpage_Harvest",
+    "description": "I am interested in information about the upcoming hop harvest, including selection options, availability and timing. Please send me more information or have a representative reach out."
   },
   "lupomax": {
     "subject": "LupoMax® Product Inquiry",
-    "campaign_name": "JIH_OtherCampaign",
+    "campaign_name": "JIH_landingpage_Lupomax",
     "description": "I am interested in learning more about LupoMax®. Please send me more information or have a representative reach out."
   },
   "lupocore": {
     "subject": "LupoCore® Product Inquiry",
-    "campaign_name": "JIH_OtherCampaign",
+    "campaign_name": "JIH_landingpage_Lupocore",
     "description": "I am interested in learning more about LupoCore®. Please send me more information or have a representative reach out."
   },
   "euphorics": {
     "subject": "Euphorics™ Hop Inquiry",
+    "campaign_name": "JIH_landingpage_Euphorics",
     "description": "I am interested in learning more about Euphorics™. Please send me more information or have a representative reach out."
   },
   "incognito": {
     "subject": "Incognito® Hop Extract Inquiry",
+    "campaign_name": "JIH_landingpage_Incognito",
     "description": "I am interested in learning more about Incognito®. Please send me more information or have a representative reach out."
   },
   "spectrum": {
     "subject": "Spectrum™ Hop Inquiry",
+    "campaign_name": "JIH_landingpage_Spectrum",
     "description": "I am interested in learning more about Spectrum™. Please send me more information or have a representative reach out."
   },
   "flex": {
     "subject": "Flex™ Hop Inquiry",
+    "campaign_name": "JIH_landingpage_Flex",
     "description": "I am interested in learning more about Flex™. Please send me more information or have a representative reach out."
   },
   "prysma": {
     "subject": "Prysma™ Hop Inquiry",
+    "campaign_name": "JIH_landingpage_Prysma",
     "description": "I am interested in learning more about Prysma™. Please send me more information or have a representative reach out."
   },
   "pha": {
     "subject": "Pure Hop Alpha (PHA) Inquiry",
+    "campaign_name": "JIH_landingpage_PHA",
     "description": "I am interested in learning more about PHAs (Precision in Hop Aroma). Please send me more information or have a representative reach out."
   },
   "australian-hops": {
     "subject": "Australian Hops Inquiry",
+    "campaign_name": "JIH_landingpage_AustralianHops",
     "description": "I am interested in learning more about Australian hops. Please send me more information or have a representative reach out."
   },
   "kettle-redi": {
     "subject": "Kettle Redi Inquiry",
+    "campaign_name": "JIH_landingpage_KettleRedi",
     "description": "I am interested in learning more about Kettle Redi. Please send me more information or have a representative reach out."
   },
   "hop-haze": {
     "subject": "Hop Haze Inquiry",
+    "campaign_name": "JIH_landingpage_HopHaze",
     "description": "I am interested in learning more about Hop Haze. Please send me more information or have a representative reach out."
   },
   "crhoma-pure": {
     "subject": "Hop Aid Inquiry",
+    "campaign_name": "JIH_landingpage_HopAid",
     "description": "I am interested in learning more about Chroma Pure. Please send me more information or have a representative reach out."
   },
   "european-hops": {
     "subject": "Hop Aid Inquiry",
+    "campaign_name": "JIH_landingpage_EuropeanHops",
     "description": "I am interested in learning more about European Hops. Please send me more information or have a representative reach out."
   },
   "_branches": {
