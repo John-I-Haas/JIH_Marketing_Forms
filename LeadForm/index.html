@@ -13,15 +13,15 @@
 
   <div class="form-wrapper">
 
-    <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D9M00000Ki5V8"
+    <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D2p0000012FXy"
       method="POST">
 
-      <input type="hidden" name="oid" value="00D9M00000Ki5V8">
+      <input type="hidden" name="oid" value="00D2p0000012FXy">
       <!-- retURL must be an absolute URL when deployed — update to match the hosted domain -->
       <input type="hidden" name="retURL" value="https://jih-marketing-forms.vercel.app/thankyou.html">
       <!--<input type="hidden" name="Campaign_ID" value="7019M00001TBlpMQAT">-->
       <!-- JIH_Campaign__c -->
-      <input type="hidden" id="00N9M00000XtQID" maxlength="255" name="00N9M00000XtQID" size="20" type="text" data-field="campaign_field" />
+      <input type="hidden" id="00NVi00000F3KbC" maxlength="255" name="00NVi00000F3KbC" size="20" type="text" data-field="campaign_field" />
 
       <!--  Debug fields (uncomment to test) 
       <input type="hidden" name="debug" value="1">
@@ -130,14 +130,14 @@
 
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
-            <input type="checkbox" id="data-consent" name="00N9M00000Xl7Pd" value="1" required data-field="data_consent_lead">
+            <input type="checkbox" id="data-consent" value="1" required data-field="data_consent_lead">
             <label for="data-consent" class="checkbox-label">I have read and agree to the John I. Haas <a href="https://www.johnihaas.com/privacy-policy/" target="_blank">Privacy Policy</a>. *</label>
           </div>
         </li>
 
         <li class="full-width checkbox-field">
           <div class="checkbox-option">
-            <input type="checkbox" id="newsletter-consent" name="00N9M00000Xl7EL" value="1" data-field="newsletter_consent_lead">
+            <input type="checkbox" id="newsletter-consent" name="00NVi00000F3KbD" value="1" data-field="newsletter_consent_lead">
             <label for="newsletter-consent" class="checkbox-label">Yes, I want to receive marketing emails from John I. Haas, including newsletters, product updates, and other important information. I understand that I can revoke this consent at any time.</label>
           </div>
         </li>

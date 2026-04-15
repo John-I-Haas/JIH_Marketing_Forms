@@ -61,7 +61,8 @@
         .then(function (res) { return res.json(); })
         .then(function (data) {
           var envCfg = data['_config'] || {};
-          var defaultOrg = (envCfg.sandbox === false) ? 'prod' : (envCfg.sandbox_default || 'poolorg14');
+          if (envCfg.sandbox === false) return; // prod: hardcoded HTML values are already prod — nothing to patch
+          var defaultOrg = envCfg.sandbox_default || 'poolorg14';
           applyOrgConfig(defaultOrg);
         })
         .catch(function () {}); // silently ignore — form falls back to hardcoded defaults
@@ -102,7 +103,7 @@
   // Maps human-readable preset keys to Salesforce field name attributes
   var fieldAliases = {
     'lead_source_detail': '00N2p0000097UMz',
-    'campaign_name':      '00N9M00000XtQID'
+    'campaign_name':      '00NVi00000F3KbC'
   };
 
   function applyPreset(preset) {
