@@ -24,6 +24,12 @@
     "campaign_name": "JIH_landingpage_Lupocore",
     "description": "I am interested in learning more about LupoCore®. Please send me more information or have a representative reach out."
   },
+  "lupocore-lupohops": {
+    "subject": "LupoCore® Product Inquiry",
+    "campaign_name": "JIH_landingpage_Lupohops.com",
+    "lead_source_detail": "LupoCore® Product Inquiry from lupohops.com",
+    "description": "I am interested in learning more about LupoCore®. Please send me more information or have a representative reach out."
+  },
   "euphorics": {
     "subject": "Euphorics™ Hop Inquiry",
     "campaign_name": "JIH_landingpage_Euphorics",
