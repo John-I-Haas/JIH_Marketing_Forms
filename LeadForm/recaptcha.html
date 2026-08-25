@@ -1,0 +1,35 @@
+
+
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+
+<!--  Added for Recaptha -->
+<script src="https://www.google.com/recaptcha/api.js"></script><script>
+ function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
+</script>
+
+
+<form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DFg00000CpaYn" method="POST">
+
+<h1>Recaptcha</h1>
+
+<!--  ----------------------------------------------------------------------  -->
+<!--  Added for Recaptha -->
+<!--  ----------------------------------------------------------------------  -->
+<input type=hidden name='captcha_settings' value='{"keyname":"bhp_test","fallback":"true","orgId":"00DFg00000CpaYn","ts":""}'>
+
+<input type=hidden name="oid" value="00DFg00000CpaYn">
+<input type=hidden name="retURL" value="http://d">
+<label for="first_name">First Name</label><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" /><br>
+<label for="last_name">Last Name</label><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" /><br>
+<label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
+<input type="hidden"  id="lead_source" name="lead_source" value="Web" /><br>
+
+<!--  ----------------------------------------------------------------------  -->
+<!--  Added for Recaptha -->
+<!--  ----------------------------------------------------------------------  -->
+<div class="g-recaptcha" data-sitekey="6LcFeZAtAAAAALOlJ3kF-2baGkqVH1ILiquniDSd"></div><br>
+
+
+<input type="submit" name="submit">
+
+</form>
