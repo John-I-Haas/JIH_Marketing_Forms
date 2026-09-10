@@ -237,8 +237,10 @@ input[type="checkbox"] {
 /* ---- SUBMIT BUTTON ---- */
 .form-submit {
   text-align: center;
+  /*
   padding-top: 10px;
   padding-left: 10px;
+  */
 }
 
 input[type="submit"] {
@@ -362,4 +364,11 @@ input[type="submit"]:hover {
   .form-wrapper .form-intro {
     font-size: 16px;
   }
+}
+
+.g-recaptcha {
+  transform: scale(0.77);
+  -webkit-transform: scale(0.77);
+  transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
 }
