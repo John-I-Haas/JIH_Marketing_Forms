@@ -42,7 +42,7 @@ ol, ul {
 .form-wrapper {
   max-width: 700px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 20px 10px;
 }
 
 .form-wrapper h1 {
@@ -237,6 +237,7 @@ input[type="checkbox"] {
 /* ---- SUBMIT BUTTON ---- */
 .form-submit {
   text-align: center;
+  margin-top:-15px;
   /*
   padding-top: 10px;
   padding-left: 10px;
@@ -367,8 +368,9 @@ input[type="submit"]:hover {
 }
 
 .g-recaptcha {
-  transform: scale(0.77);
-  -webkit-transform: scale(0.77);
+  transform: scale(0.70);
+  -webkit-transform: scale(0.70);
   transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
+  margin-top:5px;
 }
