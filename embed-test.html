@@ -333,12 +333,15 @@
       var log = document.getElementById('log');
 
       // Verbosity: info entries (simulated POST payload) are always logged, only shown when enabled
+      // ?verbose=1 shows them; the checkbox is optional (may be commented out in the HTML)
       var verbose = document.getElementById('verbose');
-      verbose.checked = params.get('verbose') === '1';
-      log.classList.toggle('verbose', verbose.checked);
-      verbose.addEventListener('change', function () {
-        log.classList.toggle('verbose', verbose.checked);
-      });
+      log.classList.toggle('verbose', params.get('verbose') === '1');
+      if (verbose) {
+        verbose.checked = log.classList.contains('verbose');
+        verbose.addEventListener('change', function () {
+          log.classList.toggle('verbose', verbose.checked);
+        });
+      }
       var status = document.getElementById('status');
       var seen = {};
       var received = 0;
