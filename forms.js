@@ -185,3 +185,123 @@
       .catch(function () {});
   });
 })();
+
+// Parent-site conversion tracking (GTM) — see vercel-form-gtm-handover.md
+// Form page: when the iframe URL has ?form_id=, tracking params are appended to retURL on submit.
+// Thank-you page: when those params are present and we're inside an iframe, notify the parent via postMessage.
+// Without ?form_id= nothing changes: same Salesforce payload, same retURL, no message.
+(function () {
+  // PRE-RELEASE: trim to production parent origins only (www.johnihaas.com + confirmed Webflow/WordPress prod domains)
+  var ALLOWED_PARENT_ORIGINS = [
+    'https://www.johnihaas.com',
+    'https://johnihaas.com',
+    'https://jih-marketing-forms.vercel.app',                     // parent.html test page
+    'https://jih-marketing-forms-git-staging-john-i-haas.vercel.app',
+    'http://localhost:5500',
+    'http://127.0.0.1:5500',
+    'http://localhost:8080',
+    'http://localhost:3000'
+    // TODO: add WordPress / Webflow staging origins once confirmed
+  ];
+  var MESSAGE_SOURCE = 'haas-marketing-forms';
+
+  var params = new URLSearchParams(location.search);
+
+  function newSubmissionId() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+  }
+
+  // ── Form page: point retURL at this deployment's own thank-you page ──
+  // The HTML hard-codes the prod host; on staging/preview/localhost the visitor should land on
+  // the thank-you page of the same instance. Only rewrites our own /thankyou.html, keeps path + query.
+  function useSameOriginThankYou() {
+    var retInput = document.querySelector('[name="retURL"]');
+    if (!retInput || !retInput.value) return;
+    if (location.protocol !== 'https:' && location.protocol !== 'http:') return; // file:// — keep hard-coded value
+    var url = new URL(retInput.value);
+    if (!/\/thankyou\.html$/.test(url.pathname)) return;
+    if (url.origin === location.origin) return;
+    retInput.value = location.origin + url.pathname + url.search + url.hash;
+  }
+
+  // ── Form page: carry tracking metadata through the Salesforce redirect ──
+  function attachRetURLTracking() {
+    var form = document.querySelector('form');
+    var retInput = document.querySelector('[name="retURL"]');
+    if (!form || !retInput) return; // not a form page (e.g. thankyou.html)
+
+    var formId = params.get('form_id');
+    if (!formId) {
+      console.warn('[haas-forms] No ?form_id= in the iframe URL — parent conversion tracking is disabled for this form.');
+      return;
+    }
+
+    var formType = document.querySelector('[name="orgid"]') ? 'case' : 'lead';
+    var campaign = params.get('campaign');
+
+    form.addEventListener('submit', function () {
+      try {
+        var url = new URL(retInput.value);
+        url.searchParams.set('form_id', formId);
+        url.searchParams.set('form_type', formType);
+        if (campaign) url.searchParams.set('campaign', campaign);
+        url.searchParams.set('sid', newSubmissionId());
+        retInput.value = url.toString();
+      } catch (e) {
+        console.warn('[haas-forms] Could not add tracking params to retURL — submitting without tracking.', e);
+      }
+    });
+  }
+
+  // ── Thank-you page: notify the parent site ──
+  function pickTargetOrigins() {
+    // Prefer the real parent origin where the browser exposes it (Chrome, Safari, Edge)
+    if (location.ancestorOrigins && location.ancestorOrigins.length) {
+      var parentOrigin = location.ancestorOrigins[0];
+      if (ALLOWED_PARENT_ORIGINS.indexOf(parentOrigin) >= 0) return [parentOrigin];
+      console.warn('[haas-forms] Parent origin ' + parentOrigin + ' is not in the allowlist — no conversion message sent.');
+      return [];
+    }
+    // Firefox: post to every allowed origin — the browser only delivers to the one that matches
+    return ALLOWED_PARENT_ORIGINS;
+  }
+
+  function notifyParentOfSubmission() {
+    var sid = params.get('sid');
+    var formId = params.get('form_id');
+    if (!sid || !formId) return; // untracked submission or direct visit
+    if (window.parent === window) return; // not embedded
+
+    var sentKey = 'haas-forms-sent-' + sid;
+    try { if (sessionStorage.getItem(sentKey)) return; } catch (e) {} // reload of thank-you page
+
+    var formType = params.get('form_type');
+    var message = {
+      source: MESSAGE_SOURCE,
+      message_type: 'form_submission',
+      version: 1,
+      status: 'success',
+      form_id: formId,
+      form_type: formType === 'case' ? 'case' : 'lead',
+      campaign: params.get('campaign') || null,
+      submission_id: sid
+    };
+
+    pickTargetOrigins().forEach(function (origin) {
+      try { window.parent.postMessage(message, origin); } catch (e) {}
+    });
+
+    try { sessionStorage.setItem(sentKey, '1'); } catch (e) {}
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      useSameOriginThankYou();
+      attachRetURLTracking();
+      notifyParentOfSubmission();
+    } catch (e) {
+      console.warn('[haas-forms] Conversion tracking error — form behaviour is unaffected.', e);
+    }
+  });
+})();

@@ -503,7 +503,8 @@
     <div class="parallax-overlay"></div>
     <div class="parallax-content">
       <iframe
-        src="https://jih-marketing-forms.vercel.app/LeadForm/index.html?template=transparent"
+        id="haas-marketing-form-iframe"
+        src="LeadForm/index.html?template=transparent&form_id=parent-test"
         frameborder="0"
         allowtransparency="true"
         scrolling="no"
@@ -576,6 +577,46 @@
       </div>
     </div>
   </footer>
+
+  <!-- Parent-site conversion listener (from vercel-form-gtm-handover.md) — test harness -->
+  <script>
+    (function () {
+      var FORM_ORIGIN = location.origin; // test harness: form is served from the same deployment
+      var EXPECTED_SOURCE = "haas-marketing-forms";
+
+      window.dataLayer = window.dataLayer || [];
+
+      window.addEventListener("message", function (event) {
+        if (event.origin !== FORM_ORIGIN) return;
+
+        var iframe = document.querySelector("#haas-marketing-form-iframe");
+        if (iframe && event.source !== iframe.contentWindow) return;
+
+        var data = event.data;
+        if (!data || typeof data !== "object") return;
+        if (data.source !== EXPECTED_SOURCE) return;
+        if (data.message_type !== "form_submission") return;
+        if (data.version !== 1) return;
+        if (data.status !== "success") return;
+        if (typeof data.form_id !== "string" || !data.form_id) return;
+        if (data.form_type !== "lead" && data.form_type !== "case") return;
+
+        window.__haasFormSubmissionIds = window.__haasFormSubmissionIds || {};
+        if (data.submission_id && window.__haasFormSubmissionIds[data.submission_id]) return;
+        if (data.submission_id) window.__haasFormSubmissionIds[data.submission_id] = true;
+
+        var entry = {
+          event: "form_submission",
+          form_id: data.form_id,
+          form_type: data.form_type,
+          campaign: data.campaign || null,
+          submission_id: data.submission_id || null
+        };
+        window.dataLayer.push(entry);
+        console.log("[parent] dataLayer push", entry);
+      });
+    })();
+  </script>
 
 </body>
 </html>
