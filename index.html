@@ -165,6 +165,59 @@
       background: #323E48;
       color: #fdf6ef;
     }
+    /* ---- EMBED & EVENT TEST ---- */
+    .embed-test-section {
+      border: 2px solid #323E48;
+      padding: 30px;
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .embed-test-section h2 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .embed-test-section .presets-note {
+      font-family: alternate-gothic-condensed-a, sans-serif;
+      font-size: 15px;
+      color: #323E48;
+      opacity: 0.6;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .embed-test-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .embed-test-grid > div {
+      flex: 1 1 calc(50% - 16px);
+      min-width: 220px;
+    }
+
+    .embed-test-grid label {
+      display: block;
+      font-family: alternate-gothic-condensed-a, sans-serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #323E48;
+      margin-bottom: 6px;
+    }
+
+    .embed-test-url {
+      font-family: monospace;
+      font-size: 13px;
+      color: #323E48;
+      word-break: break-all;
+      background: #fff;
+      padding: 10px 12px;
+      border-radius: 6px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 
@@ -228,7 +281,76 @@
     <div class="selector-buttons" style="margin-top: 30px;">
       <a href="parent.html">Example Embedding</a>
     </div>
-v4.4 (submit event)
+    <div class="embed-test-section">
+      <h2>Embed &amp; Event Test</h2>
+      <p class="presets-note">Opens a test parent page that embeds the form in an iframe and shows the submission event it receives back. Template &amp; Company above are applied too.</p>
+
+      <form id="embed-test-form">
+        <div class="embed-test-grid">
+          <div>
+            <label for="et-form">Form</label>
+            <div class="select-wrapper">
+              <select id="et-form">
+                <option value="LeadForm/index.html">Lead Form</option>
+                <option value="CaseForm/index.html">Contact Us (Case)</option>
+                <option value="LeadForm/CBCForm.html">CBC Form</option>
+                <option value="LeadForm/RichForm.html">Rich Form</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="et-form-id">form_id</label>
+            <input id="et-form-id" type="text" value="embed-test" placeholder="form_id (empty = tracking off)">
+          </div>
+          <div>
+            <label for="et-campaign">campaign</label>
+            <input id="et-campaign" type="text" list="et-campaign-list" placeholder="campaign (optional)">
+            <datalist id="et-campaign-list">
+              <option value="how-to-buy"></option>
+              <option value="harvest"></option>
+              <option value="lupomax"></option>
+              <option value="lupocore"></option>
+              <option value="euphorics"></option>
+              <option value="incognito"></option>
+              <option value="spectrum"></option>
+              <option value="flex"></option>
+              <option value="prysma"></option>
+              <option value="pha"></option>
+              <option value="australian-hops"></option>
+            </datalist>
+          </div>
+          <div>
+            <label for="et-org">org</label>
+            <div class="select-wrapper">
+              <select id="et-org">
+                <option value="">Default (presets.json)</option>
+                <option value="prod">prod</option>
+                <option value="uat">uat</option>
+                <option value="poolorg1">poolorg1</option>
+                <option value="poolorg14">poolorg14</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="et-mode">Submit mode</label>
+            <div class="select-wrapper">
+              <select id="et-mode">
+                <option value="">Auto (simulate on localhost)</option>
+                <option value="simulate">Simulate (no Salesforce, no reCAPTCHA)</option>
+                <option value="salesforce">Real Salesforce submit</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="embed-test-url" id="et-url"></div>
+
+        <div class="form-submit">
+          <input type="submit" value="Open Embed Test">
+        </div>
+      </form>
+    </div>
+v4.5 (embed & event test)
   </div>
 
   <script>
@@ -258,6 +380,40 @@ v4.4 (submit event)
     document.querySelectorAll('input[name="tpl"], input[name="co"]').forEach(function (radio) {
       radio.addEventListener('change', updateLinks);
     });
+    // Embed & Event Test — builds embed-test.html?form=...&form_id=...&campaign=...&org=...&template=...&branch=...
+    function embedTestURL() {
+      var url = new URL('embed-test.html', location.href);
+      var values = {
+        form:     document.getElementById('et-form').value,
+        form_id:  document.getElementById('et-form-id').value.trim(),
+        campaign: document.getElementById('et-campaign').value.trim(),
+        org:      document.getElementById('et-org').value,
+        mode:     document.getElementById('et-mode').value,
+        template: document.querySelector('input[name="tpl"]:checked').value,
+        branch:   document.querySelector('input[name="co"]:checked').value
+      };
+      if (values.branch === 'jih') values.branch = '';
+      Object.keys(values).forEach(function (key) {
+        if (values[key]) url.searchParams.set(key, values[key]);
+      });
+      return url.toString();
+    }
+
+    function updateEmbedTestURL() {
+      document.getElementById('et-url').textContent = embedTestURL();
+    }
+
+    document.querySelectorAll('#embed-test-form input, #embed-test-form select, input[name="tpl"], input[name="co"]').forEach(function (el) {
+      el.addEventListener('input', updateEmbedTestURL);
+      el.addEventListener('change', updateEmbedTestURL);
+    });
+
+    document.getElementById('embed-test-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      window.open(embedTestURL(), '_blank');
+    });
+
+    updateEmbedTestURL();
   </script>
 </body>
 

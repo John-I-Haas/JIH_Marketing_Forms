@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embed &amp; Event Test - John I. Haas</title>
+  <link rel="stylesheet" href="forms.css">
+  <style>
+    body {
+      padding: 30px 16px;
+    }
+
+    .test-wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      color: #323E48;
+      font-family: alternate-gothic-condensed-a, sans-serif;
+    }
+
+    .test-wrapper h1 {
+      font-family: gelica, sans-serif;
+      font-size: 36px;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .test-wrapper h2 {
+      font-family: gelica, sans-serif;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .test-intro {
+      font-size: 17px;
+      opacity: 0.7;
+      margin-bottom: 24px;
+    }
+
+    .test-intro a {
+      color: #4a8b2c;
+    }
+
+    .test-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .test-frame {
+      flex: 1 1 560px;
+      min-width: 0;
+    }
+
+    .test-side {
+      flex: 1 1 360px;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .panel {
+      border: 2px solid #323E48;
+      padding: 20px;
+      background: #fdf6ef;
+    }
+
+    .test-frame iframe {
+      display: block;
+      width: 100%;
+      min-height: 1000px;
+      border: 2px dashed #323E48;
+      background: transparent;
+    }
+
+    .frame-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .frame-bar button {
+      background: transparent;
+      border: 1px solid #323E48;
+      color: #323E48;
+      font-family: alternate-gothic-condensed-a, sans-serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 7px 20px;
+      cursor: pointer;
+    }
+
+    .frame-bar button:hover {
+      background: #323E48;
+      color: #fdf6ef;
+    }
+
+    table.params {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+
+    table.params td {
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(50, 62, 72, 0.15);
+      vertical-align: top;
+      word-break: break-all;
+    }
+
+    table.params td:first-child {
+      font-family: monospace;
+      font-size: 13px;
+      white-space: nowrap;
+      width: 1%;
+      opacity: 0.7;
+    }
+
+    .mono {
+      font-family: monospace;
+      font-size: 13px;
+      word-break: break-all;
+    }
+
+    .src-link {
+      display: block;
+      margin-top: 12px;
+      color: #4a8b2c;
+    }
+
+    .notice {
+      margin-top: 12px;
+      padding: 10px 12px;
+      font-size: 15px;
+      border-left: 4px solid #c98a12;
+      background: #fff6e0;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 4px 12px;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #fff;
+      background: #8a949c;
+      margin-bottom: 14px;
+    }
+
+    .status.ok {
+      background: #4a8b2c;
+    }
+
+    .log-empty {
+      font-size: 16px;
+      opacity: 0.6;
+    }
+
+    .log-entry {
+      border-left: 4px solid #8a949c;
+      background: #fff;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .log-entry.ok {
+      border-left-color: #4a8b2c;
+    }
+
+    .log-entry.rejected {
+      border-left-color: #b3261e;
+    }
+
+    .log-entry.info {
+      border-left-color: #3a6ea5;
+      display: none;
+    }
+
+    #log.verbose .log-entry.info {
+      display: block;
+    }
+
+    .verbose-toggle {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .log-entry .log-head {
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .log-entry pre {
+      font-family: monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      background: #f4f1ec;
+      padding: 8px;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="test-wrapper">
+
+    <h1>Embed &amp; Event Test</h1>
+    <p class="test-intro">
+      This page acts as the parent website: it embeds the form in an iframe and listens for the
+      <span class="mono">form_submission</span> message sent by the thank-you page after a submit.
+      <a href="index.html">&larr; Back to forms</a>
+    </p>
+
+    <div class="test-layout">
+
+      <div class="test-frame">
+        <div class="frame-bar">
+          <h2 style="margin: 0;">Embedded form</h2>
+          <button type="button" id="reload-frame">Reload form</button>
+        </div>
+        <iframe id="haas-marketing-form-iframe" title="Embedded form" frameborder="0" allowtransparency="true"></iframe>
+      </div>
+
+      <div class="test-side">
+
+        <div class="panel">
+          <h2>Events received</h2>
+          <span class="status" id="status">Waiting for submission&hellip;</span>
+          <!-- <label class="verbose-toggle"><input type="checkbox" id="verbose"> Show simulated POST details</label>-->
+          <div id="log"><p class="log-empty">No messages yet. Submit the form to see the event here.</p></div>
+        </div>
+
+        <div class="panel">
+          <h2>Parameters passed</h2>
+          <table class="params" id="params"></table>
+          <a class="src-link mono" id="src-link" target="_blank"></a>
+          <div id="notices"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // Same contract and checks as the parent-site listener in vercel-form-gtm-handover.md (section 5)
+      var FORM_ORIGIN = location.origin; // the form is served from this same deployment
+      var EXPECTED_SOURCE = 'haas-marketing-forms';
+      var ALLOWED_FORMS = [
+        'LeadForm/index.html',
+        'CaseForm/index.html',
+        'LeadForm/CBCForm.html',
+        'LeadForm/RichForm.html'
+      ];
+
+      var params = new URLSearchParams(location.search);
+      var formPath = params.get('form') || 'LeadForm/index.html';
+      if (ALLOWED_FORMS.indexOf(formPath) < 0) formPath = 'LeadForm/index.html';
+
+      // simulate: catch the submit, skip Salesforce + reCAPTCHA, load the thank-you page like the SF redirect would.
+      // Default on localhost — Chrome blocks a public site (Salesforce) from redirecting back to a local address.
+      var isLocal = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+      var mode = params.get('mode') || (isLocal ? 'simulate' : 'salesforce');
+      if (mode !== 'simulate') mode = 'salesforce';
+
+      // Everything except ?form=, ?mode= and ?verbose= is passed through to the iframe
+      var src = new URL(formPath, location.href);
+      params.forEach(function (value, key) {
+        if (key !== 'form' && key !== 'mode' && key !== 'verbose') src.searchParams.set(key, value);
+      });
+
+      var iframe = document.getElementById('haas-marketing-form-iframe');
+      iframe.src = src.toString();
+
+      document.getElementById('reload-frame').addEventListener('click', function () {
+        iframe.src = src.toString();
+      });
+
+      // ── Parameters panel ──
+      function addRow(table, key, value) {
+        var tr = document.createElement('tr');
+        var k = document.createElement('td');
+        var v = document.createElement('td');
+        k.textContent = key;
+        v.textContent = value;
+        tr.appendChild(k);
+        tr.appendChild(v);
+        table.appendChild(tr);
+      }
+
+      var table = document.getElementById('params');
+      addRow(table, 'form', formPath);
+      addRow(table, 'mode', mode === 'simulate' ? 'simulate (no Salesforce)' : 'salesforce (real submit)');
+      src.searchParams.forEach(function (value, key) { addRow(table, key, value); });
+      addRow(table, 'parent origin', location.origin);
+
+      var link = document.getElementById('src-link');
+      link.href = src.toString();
+      link.textContent = src.toString();
+
+      var notices = document.getElementById('notices');
+      function addNotice(text) {
+        var div = document.createElement('div');
+        div.className = 'notice';
+        div.textContent = text;
+        notices.appendChild(div);
+      }
+
+      if (!src.searchParams.get('form_id')) {
+        addNotice('No form_id — tracking is off, so no event will be sent. The form console shows a [haas-forms] warning.');
+      }
+      if (location.protocol === 'file:') {
+        addNotice('Opened as a local file — serve this folder over http (e.g. localhost:5500) for postMessage to work.');
+      }
+      if (mode === 'simulate') {
+        addNotice('Simulate mode — nothing is sent to Salesforce and reCAPTCHA is removed. The payload that would be posted is shown under Events received.');
+      } else {
+        addNotice('Submissions go to the real Salesforce org (' + (src.searchParams.get('org') || 'default from presets.json') + ').');
+        if (isLocal) addNotice('On localhost Chrome blocks the Salesforce redirect back to this machine — use simulate mode here, or test the real submit on staging.');
+      }
+
+      // ── Event listener ──
+      var log = document.getElementById('log');
+
+      // Verbosity: info entries (simulated POST payload) are always logged, only shown when enabled
+      var verbose = document.getElementById('verbose');
+      verbose.checked = params.get('verbose') === '1';
+      log.classList.toggle('verbose', verbose.checked);
+      verbose.addEventListener('change', function () {
+        log.classList.toggle('verbose', verbose.checked);
+      });
+      var status = document.getElementById('status');
+      var seen = {};
+      var received = 0;
+
+      function validate(data) {
+        if (!data || typeof data !== 'object') return 'payload is not an object';
+        if (data.message_type !== 'form_submission') return 'message_type is not form_submission';
+        if (data.version !== 1) return 'unsupported version ' + data.version;
+        if (data.status !== 'success') return 'status is not success';
+        if (typeof data.form_id !== 'string' || !data.form_id) return 'missing form_id';
+        if (data.form_type !== 'lead' && data.form_type !== 'case') return 'form_type is not lead/case';
+        if (data.submission_id && seen[data.submission_id]) return 'duplicate submission_id (already received)';
+        return null;
+      }
+
+      function addLog(ok, title, details, kind) {
+        var empty = log.querySelector('.log-empty');
+        if (empty && kind !== 'info') empty.remove(); // hidden info entries keep the placeholder
+
+        var entry = document.createElement('div');
+        entry.className = 'log-entry ' + (kind || (ok ? 'ok' : 'rejected'));
+        var head = document.createElement('div');
+        head.className = 'log-head';
+        head.textContent = (kind === 'info' ? '→ ' : (ok ? '✔ ' : '✖ ')) + title + ' — ' + new Date().toLocaleTimeString();
+        entry.appendChild(head);
+        details.forEach(function (d) {
+          var pre = document.createElement('pre');
+          pre.textContent = d;
+          entry.appendChild(pre);
+        });
+        log.insertBefore(entry, log.firstChild);
+      }
+
+      // ── Simulate mode: intercept the embedded form (same origin, so the parent can reach into the iframe) ──
+      if (mode === 'simulate') {
+        iframe.addEventListener('load', function () {
+          var doc;
+          try { doc = iframe.contentDocument; } catch (e) { return; }
+          var form = doc && doc.querySelector('form');
+          if (!form) return; // thank-you page
+
+          var captcha = doc.querySelector('.g-recaptcha');
+          if (captcha) captcha.remove();
+
+          // Added after forms.js's own submit listener, so retURL already carries the tracking params
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var fields = {};
+            new FormData(form).forEach(function (value, key) {
+              if (key !== 'captcha_settings' && key !== 'g-recaptcha-response') fields[key] = value;
+            });
+            var retURL = fields.retURL || '';
+            addLog(true, 'Simulated POST to ' + form.action.split('?')[0], [
+              'fields that would be sent to Salesforce: ' + JSON.stringify(fields, null, 2)
+            ], 'info');
+            if (retURL) iframe.contentWindow.location.href = retURL;
+          });
+        });
+      }
+
+      window.dataLayer = window.dataLayer || [];
+
+      window.addEventListener('message', function (event) {
+        var data = event.data;
+        // Ignore unrelated messages (browser extensions, other widgets)
+        if (!data || typeof data !== 'object' || data.source !== EXPECTED_SOURCE) return;
+
+        var payload = 'message: ' + JSON.stringify(data, null, 2);
+
+        if (event.origin !== FORM_ORIGIN) {
+          addLog(false, 'Rejected: unexpected origin ' + event.origin, [payload]);
+          return;
+        }
+        if (event.source !== iframe.contentWindow) {
+          addLog(false, 'Rejected: message did not come from the embedded iframe', [payload]);
+          return;
+        }
+
+        var problem = validate(data);
+        if (problem) {
+          addLog(false, 'Rejected: ' + problem, [payload]);
+          return;
+        }
+        if (data.submission_id) seen[data.submission_id] = true;
+
+        var push = {
+          event: 'form_submission',
+          form_id: data.form_id,
+          form_type: data.form_type,
+          campaign: data.campaign || null,
+          submission_id: data.submission_id || null
+        };
+        window.dataLayer.push(push);
+        console.log('[embed-test] dataLayer push', push);
+
+        received++;
+        status.className = 'status ok';
+        status.textContent = received + ' event' + (received > 1 ? 's' : '') + ' received';
+        addLog(true, 'Received form_submission from ' + event.origin, [
+          payload,
+          'dataLayer.push(' + JSON.stringify(push, null, 2) + ')'
+        ]);
+      });
+    })();
+  </script>
+</body>
+
+</html>
