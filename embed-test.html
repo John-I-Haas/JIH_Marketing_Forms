@@ -182,11 +182,15 @@
       display: none;
     }
 
-    #log.verbose .log-entry.info {
+    #log.debug .log-entry.info {
       display: block;
     }
 
-    .verbose-toggle {
+    .debug-toggle[hidden] {
+      display: none;
+    }
+
+    .debug-toggle {
       display: block;
       font-size: 15px;
       margin-bottom: 12px;
@@ -236,7 +240,7 @@
         <div class="panel">
           <h2>Events received</h2>
           <span class="status" id="status">Waiting for submission&hellip;</span>
-          <!-- <label class="verbose-toggle"><input type="checkbox" id="verbose"> Show simulated POST details</label>-->
+          <label class="debug-toggle" id="debug-toggle" hidden><input type="checkbox" id="debug"> Show POST details</label>
           <div id="log"><p class="log-empty">No messages yet. Submit the form to see the event here.</p></div>
         </div>
 
@@ -273,10 +277,14 @@
       var mode = params.get('mode') || (isLocal ? 'simulate' : 'salesforce');
       if (mode !== 'simulate') mode = 'salesforce';
 
-      // Everything except ?form=, ?mode= and ?verbose= is passed through to the iframe
+      // ?debug=1: shows the POST details toggle + entries here, and is passed to the form,
+      // which then adds Salesforce's debug / debugEmail fields (see forms.js)
+      var debug = params.get('debug') === '1';
+
+      // Everything except ?form= and ?mode= is passed through to the iframe
       var src = new URL(formPath, location.href);
       params.forEach(function (value, key) {
-        if (key !== 'form' && key !== 'mode' && key !== 'verbose') src.searchParams.set(key, value);
+        if (key !== 'form' && key !== 'mode') src.searchParams.set(key, value);
       });
 
       var iframe = document.getElementById('haas-marketing-form-iframe');
@@ -328,20 +336,21 @@
         addNotice('Submissions go to the real Salesforce org (' + (src.searchParams.get('org') || 'default from presets.json') + ').');
         if (isLocal) addNotice('On localhost Chrome blocks the Salesforce redirect back to this machine — use simulate mode here, or test the real submit on staging.');
       }
+      if (debug) {
+        addNotice('Salesforce debug on — Salesforce shows its debug page in the iframe instead of redirecting to the thank-you page, so no event fires. Details are emailed to debug_email from the org config.');
+      }
 
       // ── Event listener ──
       var log = document.getElementById('log');
 
-      // Verbosity: info entries (simulated POST payload) are always logged, only shown when enabled
-      // ?verbose=1 shows them; the checkbox is optional (may be commented out in the HTML)
-      var verbose = document.getElementById('verbose');
-      log.classList.toggle('verbose', params.get('verbose') === '1');
-      if (verbose) {
-        verbose.checked = log.classList.contains('verbose');
-        verbose.addEventListener('change', function () {
-          log.classList.toggle('verbose', verbose.checked);
-        });
-      }
+      // POST detail entries are always logged, only shown (with their toggle) when ?debug=1
+      var debugBox = document.getElementById('debug');
+      log.classList.toggle('debug', debug);
+      document.getElementById('debug-toggle').hidden = !debug;
+      debugBox.checked = debug;
+      debugBox.addEventListener('change', function () {
+        log.classList.toggle('debug', debugBox.checked);
+      });
       var status = document.getElementById('status');
       var seen = {};
       var received = 0;
@@ -375,32 +384,42 @@
         log.insertBefore(entry, log.firstChild);
       }
 
-      // ── Simulate mode: intercept the embedded form (same origin, so the parent can reach into the iframe) ──
-      if (mode === 'simulate') {
-        iframe.addEventListener('load', function () {
-          var doc;
-          try { doc = iframe.contentDocument; } catch (e) { return; }
-          var form = doc && doc.querySelector('form');
-          if (!form) return; // thank-you page
+      // ── Watch the embedded form (same origin, so the parent can reach into the iframe) ──
+      // Logs what is posted where; in simulate mode also skips Salesforce + reCAPTCHA.
+      iframe.addEventListener('load', function () {
+        var doc;
+        try { doc = iframe.contentDocument; } catch (e) { return; }
+        var form = doc && doc.querySelector('form');
+        if (!form) return; // thank-you page or Salesforce debug page
 
+        if (mode === 'simulate') {
           var captcha = doc.querySelector('.g-recaptcha');
           if (captcha) captcha.remove();
+        }
 
-          // Added after forms.js's own submit listener, so retURL already carries the tracking params
-          form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            var fields = {};
-            new FormData(form).forEach(function (value, key) {
-              if (key !== 'captcha_settings' && key !== 'g-recaptcha-response') fields[key] = value;
-            });
-            var retURL = fields.retURL || '';
-            addLog(true, 'Simulated POST to ' + form.action.split('?')[0], [
-              'fields that would be sent to Salesforce: ' + JSON.stringify(fields, null, 2)
-            ], 'info');
-            if (retURL) iframe.contentWindow.location.href = retURL;
+        // Added after forms.js's own submit listener, so retURL already carries the tracking params
+        form.addEventListener('submit', function (e) {
+          var fields = {};
+          var captchaToken = '';
+          new FormData(form).forEach(function (value, key) {
+            if (key === 'g-recaptcha-response') captchaToken = value;
+            else if (key !== 'captcha_settings') fields[key] = value;
           });
+
+          var details = ['fields: ' + JSON.stringify(fields, null, 2)];
+          if (mode === 'salesforce') {
+            details.unshift('reCAPTCHA: ' + (captchaToken
+              ? 'solved (token sent)'
+              : 'NOT solved — Salesforce will discard this lead if reCAPTCHA is required'));
+          }
+          addLog(true, (mode === 'simulate' ? 'Simulated POST to ' : 'POST to ') + form.action, details, 'info');
+
+          if (mode === 'simulate') {
+            e.preventDefault();
+            if (fields.retURL) iframe.contentWindow.location.href = fields.retURL;
+          }
         });
-      }
+      });
 
       window.dataLayer = window.dataLayer || [];
 

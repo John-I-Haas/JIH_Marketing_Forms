@@ -2,6 +2,7 @@
   "oid": "00DFg00000CpaYn",
   "action_lead": "https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DFg00000CpaYn",
   "action_case": "https://barthhaas--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DFg00000CpaYn",
+  "debug_email": "ruben.cervantes@johnihaas.com",
   "fields": {
     "campaign_field":          "00NFg00000WMCbD",
     "customer_tier":           "00N2p000009T9yk",

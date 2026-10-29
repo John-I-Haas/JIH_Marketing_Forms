@@ -70,6 +70,61 @@
   });
 })();
 
+// Salesforce debug mode — add ?debug=1 to the form URL
+// Adds the Web-to-Lead/Case debug fields: Salesforce then shows its debug page (fields received) instead of
+// redirecting to retURL, and emails the details to debug_email from the active org config (configs/<org>.json).
+// Without ?debug=1 nothing is added.
+(function () {
+  var params = new URLSearchParams(location.search);
+  if (params.get('debug') !== '1') return;
+
+  var scriptSrc = document.currentScript ? document.currentScript.src : '';
+  var base = scriptSrc ? scriptSrc.substring(0, scriptSrc.lastIndexOf('/') + 1) : '../';
+
+  function setHidden(form, name, value) {
+    var el = form.querySelector('[name="' + name + '"]');
+    if (!el) {
+      el = document.createElement('input');
+      el.type = 'hidden';
+      el.name = name;
+      form.appendChild(el);
+    }
+    el.value = value;
+  }
+
+  // Same org resolution as the org config block: ?org= wins, else presets.json _config
+  function resolveOrg() {
+    if (params.get('org')) return Promise.resolve(params.get('org'));
+    return fetch(base + 'presets.json')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var envCfg = data['_config'] || {};
+        return envCfg.sandbox === false ? 'prod' : (envCfg.sandbox_default || 'poolorg14');
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.querySelector('form');
+    if (!form) return; // thank-you page
+
+    setHidden(form, 'debug', '1');
+
+    resolveOrg()
+      .then(function (orgName) {
+        return fetch(base + 'configs/' + orgName + '.json')
+          .then(function (res) { return res.json(); })
+          .then(function (cfg) {
+            if (cfg.debug_email) setHidden(form, 'debugEmail', cfg.debug_email);
+            console.info('[haas-forms] Salesforce debug mode on — org: ' + orgName +
+              ', debugEmail: ' + (cfg.debug_email || '(none)'));
+          });
+      })
+      .catch(function () {
+        console.info('[haas-forms] Salesforce debug mode on — no debugEmail (org config unavailable)');
+      });
+  });
+})();
+
 // Template CSS injection — runs immediately when script is parsed in <head>
 (function () {
   var template = new URLSearchParams(location.search).get('template');
@@ -200,6 +255,7 @@
     'http://localhost:5500',
     'http://127.0.0.1:5500',
     'http://localhost:8080',
+    'http://127.0.0.1:5501',
     'http://localhost:3000'
     // TODO: add WordPress / Webflow staging origins once confirmed
   ];
