@@ -34,6 +34,17 @@
           if (orgid) orgid.value = cfg.oid;
         }
 
+        // Patch reCAPTCHA settings — Salesforce validates the token against this orgId + keyname
+        var captcha = document.querySelector('[name="captcha_settings"]');
+        if (captcha && cfg.oid) {
+          try {
+            var captchaCfg = JSON.parse(captcha.value);
+            captchaCfg.orgId = cfg.oid;
+            if (cfg.captcha_keyname) captchaCfg.keyname = cfg.captcha_keyname;
+            captcha.value = JSON.stringify(captchaCfg);
+          } catch (e) {}
+        }
+
         // Patch custom-ID fields via data-field attributes
         if (cfg.fields) {
           Object.keys(cfg.fields).forEach(function (key) {
