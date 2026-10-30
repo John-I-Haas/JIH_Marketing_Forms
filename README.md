@@ -124,6 +124,36 @@ https://jih-marketing-forms.vercel.app/LeadForm/index.html?org=uat
 
 ---
 
+### `?form_id=`
+
+Enables **conversion tracking on the parent site** (GA4 / Google Ads via GTM). When present, the form appends tracking params to `retURL` on submit; after the Salesforce redirect, `thankyou.html` sends a `postMessage` to the parent page:
+
+```javascript
+{
+  source: "haas-marketing-forms",
+  message_type: "form_submission",
+  version: 1,
+  status: "success",
+  form_id: "<form_id>",
+  form_type: "lead",        // "case" for CaseForm
+  campaign: "<campaign> or null",
+  submission_id: "<uuid generated at submit>"
+}
+```
+
+- Without `?form_id=` no tracking params are added and no message is sent (same Salesforce payload as before); a warning is logged to the console.
+- `retURL` is rewritten at runtime to the `thankyou.html` of the deployment serving the form (prod, staging, preview or localhost), so the message always comes from the same origin as the iframe.
+- Only origins in `ALLOWED_PARENT_ORIGINS` (in `forms.js`) receive the message.
+- "Success" means the visitor was redirected to the thank-you page — Web-to-Lead gives no confirmation that the record was created.
+- The parent-site listener is documented in `vercel-form-gtm-handover.md` (a working copy is in `parent.html`).
+
+**Example:**
+```
+https://jih-marketing-forms.vercel.app/LeadForm/index.html?form_id=contact-us&campaign=contact-us
+```
+
+---
+
 ### Combining parameters
 
 All parameters can be combined freely:
@@ -429,4 +459,5 @@ When a field value is empty (`""`) in the config, `forms.js` **removes the `name
 - [ ] Replace shortened country list in HTML with the full country list
 - [ ] Update `retURL` in all HTML files to the final hosted domain
 - [ ] Remove or comment out `debug` / `debugEmail` hidden fields in all HTML files
+- [ ] Trim `ALLOWED_PARENT_ORIGINS` in `forms.js` to production parent origins only (remove localhost / staging / vercel test origins)
 - [ ] Flip `"sandbox": false` in `presets.json` `_config` to route all unparameterised traffic to prod
