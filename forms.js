@@ -263,6 +263,7 @@
     'https://johnihaas.com',
     'https://jih-marketing-forms.vercel.app',                     // parent.html test page
     'https://jih-marketing-forms-git-staging-john-i-haas.vercel.app',
+    'https://haasstage.wpengine.com',                               // client WordPress staging
     'http://localhost:5500',
     'http://127.0.0.1:5500',
     'http://localhost:8080',
