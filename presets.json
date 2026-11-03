@@ -1,6 +1,6 @@
 {
   "_config": {
-    "sandbox": false,
+    "sandbox": true,
     "sandbox_default": "uat"
   },
 
