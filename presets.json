@@ -1,7 +1,8 @@
 {
   "_config": {
     "sandbox": false,
-    "sandbox_default": "uat"
+    "sandbox_default": "uat",
+    "sandbox_hosts": ["jih-marketing-forms-git-staging-john-i-haas.vercel.app", "localhost", "127.0.0.1"]
   },
 
   "how-to-buy": {
