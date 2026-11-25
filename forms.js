@@ -1,8 +1,16 @@
+// Default org when there is no ?org= — shared by the org config and debug blocks.
+// Controlled by _config in presets.json:
+//   { "sandbox": true,  "sandbox_default": "uat" }  → default = uat everywhere
+//   { "sandbox": false, "sandbox_default": "uat" }  → default = prod
+//   "sandbox_hosts": [...]                          → these hosts (staging, localhost) use sandbox_default even when sandbox is false
+function haasDefaultOrg(envCfg) {
+  var sandboxHosts = envCfg.sandbox_hosts || [];
+  var useSandbox = envCfg.sandbox !== false || sandboxHosts.indexOf(location.hostname) >= 0;
+  return useSandbox ? (envCfg.sandbox_default || 'poolorg14') : 'prod';
+}
+
 // Org config — patches form action, oid, and custom field name/id attributes at runtime
 // Usage: add ?org=<name> (matches a file in configs/) to force a specific org.
-// Default org is controlled by _config in presets.json:
-//   { "sandbox": true,  "sandbox_default": "poolorg14" }  → default = poolorg14
-//   { "sandbox": false, "sandbox_default": "poolorg14" }  → default = prod
 (function () {
   var org = new URLSearchParams(location.search).get('org');
 
@@ -71,9 +79,8 @@
       fetch(presetsURL)
         .then(function (res) { return res.json(); })
         .then(function (data) {
-          var envCfg = data['_config'] || {};
-          if (envCfg.sandbox === false) return; // prod: hardcoded HTML values are already prod — nothing to patch
-          var defaultOrg = envCfg.sandbox_default || 'poolorg14';
+          var defaultOrg = haasDefaultOrg(data['_config'] || {});
+          if (defaultOrg === 'prod') return; // hardcoded HTML values are already prod — nothing to patch
           applyOrgConfig(defaultOrg);
         })
         .catch(function () {}); // silently ignore — form falls back to hardcoded defaults
@@ -109,8 +116,7 @@
     return fetch(base + 'presets.json')
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        var envCfg = data['_config'] || {};
-        return envCfg.sandbox === false ? 'prod' : (envCfg.sandbox_default || 'poolorg14');
+        return haasDefaultOrg(data['_config'] || {});
       });
   }
 
@@ -257,19 +263,19 @@
 // Thank-you page: when those params are present and we're inside an iframe, notify the parent via postMessage.
 // Without ?form_id= nothing changes: same Salesforce payload, same retURL, no message.
 (function () {
-  // PRE-RELEASE: trim to production parent origins only (www.johnihaas.com + confirmed Webflow/WordPress prod domains)
   var ALLOWED_PARENT_ORIGINS = [
     'https://www.johnihaas.com',
     'https://johnihaas.com',
-    'https://jih-marketing-forms.vercel.app',                     // parent.html test page
+    'https://jih-marketing-forms.vercel.app',                     
     'https://jih-marketing-forms-git-staging-john-i-haas.vercel.app',
-    'https://haasstage.wpengine.com',                               // client WordPress staging
+    'https://haasstage.wpengine.com',                               
+    'https://betatec.com',
+    'https://www.betatec.com',
     'http://localhost:5500',
     'http://127.0.0.1:5500',
     'http://localhost:8080',
     'http://127.0.0.1:5501',
     'http://localhost:3000'
-    // TODO: add WordPress / Webflow staging origins once confirmed
   ];
   var MESSAGE_SOURCE = 'haas-marketing-forms';
 

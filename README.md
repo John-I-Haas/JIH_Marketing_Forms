@@ -338,19 +338,38 @@ Valid `lead_source` values: `YVH`, `Webshop`, `Website signups`, `Marketing`, `C
 
 The HTML files have field IDs and action URLs **hardcoded** as their default. When `?org=` is present, `forms.js` fetches `configs/{org}.json` and patches the DOM before the form renders — replacing the `name`/`id` attributes on custom fields, the hidden org ID, and the form `action` URL.
 
-If `?org=` is absent, nothing is patched and the hardcoded defaults are used.
+If `?org=` is absent, the default org is chosen from `presets.json` → `_config` (see below). When that default is prod, nothing is patched and the hardcoded HTML values (prod) are used.
 
-### Current default (no `?org=` param)
+### Default org (no `?org=` param)
 
-The hardcoded defaults in the HTML currently point to **poolorg14** (development sandbox):
+`haasDefaultOrg()` in `forms.js` decides, using the hostname **of the deployment serving the form** (`location.hostname` inside the iframe, never the parent site):
 
-| Field | Value |
+1. `?org=` in the URL always wins.
+2. `"sandbox": true` → `sandbox_default` on every host.
+3. `"sandbox": false` → `sandbox_default` if the hostname is in `sandbox_hosts`, otherwise **prod**.
+
+Current setting:
+
+```json
+"_config": {
+  "sandbox": false,
+  "sandbox_default": "uat",
+  "sandbox_hosts": ["jih-marketing-forms-git-staging-john-i-haas.vercel.app", "localhost", "127.0.0.1"]
+}
+```
+
+| Served from | Default org |
 |---|---|
-| Org ID | `00D9M00000Ki5V8` |
-| Lead action | `https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D9M00000Ki5V8` |
-| Case action | `https://barthhaas--poolorg14.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00D9M00000Ki5V8` |
+| `jih-marketing-forms.vercel.app` (production) | prod |
+| `jih-marketing-forms-git-staging-john-i-haas.vercel.app` (staging) | uat |
+| `localhost` / `127.0.0.1` (any port) | uat |
+| Any other host (other Vercel previews, future custom domains) | prod |
 
-To make production the default at go-live, set `"sandbox": false` in `presets.json` — see the `?org=` section above.
+- Exact hostname match: no port, no wildcards.
+- Hosts that aren't listed go to prod, so a real visitor can never end up in a sandbox. The worst case is a test landing in prod.
+- If `presets.json` fails to load, the hardcoded HTML values (prod) are used.
+- `?debug=1` resolves the org the same way (for `debugEmail`).
+- New test environment → add its hostname to `sandbox_hosts`. No code change.
 
 ### Adding a new org config
 
@@ -460,4 +479,4 @@ When a field value is empty (`""`) in the config, `forms.js` **removes the `name
 - [ ] Update `retURL` in all HTML files to the final hosted domain
 - [ ] Remove or comment out `debug` / `debugEmail` hidden fields in all HTML files
 - [ ] Trim `ALLOWED_PARENT_ORIGINS` in `forms.js` to production parent origins only (remove localhost / staging / vercel test origins)
-- [ ] Flip `"sandbox": false` in `presets.json` `_config` to route all unparameterised traffic to prod
+- [x] `"sandbox": false` in `presets.json` `_config` — prod by default; staging/localhost stay on UAT via `sandbox_hosts` (v5.0)
